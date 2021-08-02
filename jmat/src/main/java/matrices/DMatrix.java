@@ -113,7 +113,7 @@ public class DMatrix extends CMatrix<Double>
 	}
 	
 	/**
-	 * Adds a set of values as a new row in the matrix.
+	 * Adds a set of integer values (which are converted into double values) as a new row in the matrix.
 	 * @param values Values of the new row to be appended to the matrix
 	 */
 	public void addRow(int... values)
@@ -122,7 +122,7 @@ public class DMatrix extends CMatrix<Double>
 	}
 	
 	/**
-	 * Adds a set of values as a new column in the matrix.
+	 * Adds a set of integer values (which are converted into double values) as a new column in the matrix.
 	 * @param values Values of the new column to be appended to the matrix
 	 */
 	public void addColumn(int... values)

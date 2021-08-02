@@ -125,7 +125,7 @@ public interface Matrix
 	 */
 	public static <T extends Comparable<T>> CMatrix<T> mergeVertically(CMatrix<T> matrix1, CMatrix<T> matrix2)
 	{
-		return ConvertMatrix.toComparable(mergeVertically(matrix1, matrix2));
+		return ConvertMatrix.toComparable(mergeVertically(ConvertMatrix.toGeneric(matrix1), ConvertMatrix.toGeneric(matrix2)));
 	}
 	
 	/**

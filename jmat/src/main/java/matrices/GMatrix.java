@@ -19,6 +19,10 @@ public class GMatrix<T> implements Matrix, Iterable<T>
 	private ArrayList<ArrayList<T>> matrixData;
 	private T emptyVal;
 	
+	// Member variables utilised if the matrix has been initialised with a width > 0 but and a height of 0
+	private int width;
+	private boolean widthIsNotZero = false;
+	
 	/**
 	 * Constructor method which creates an empty matrix.
 	 */
@@ -132,6 +136,14 @@ public class GMatrix<T> implements Matrix, Iterable<T>
 	public void clear(int height, int width)
 	{
 		clear();
+		
+		if (height == 0 && width > 0)
+		{
+			this.width = width;
+			widthIsNotZero = true;
+			return;
+		}
+		
 		for (int i = 0; i < height; i++)
 		{
 			matrixData.add(new ArrayList<T>());
@@ -329,6 +341,9 @@ public class GMatrix<T> implements Matrix, Iterable<T>
 	 */
 	public int width()
 	{
+		if (widthIsNotZero)
+			return width;
+		
 		if (matrixData.size() == 0)
 			return 0;
 		
@@ -486,6 +501,12 @@ public class GMatrix<T> implements Matrix, Iterable<T>
 	private void normalise()
 	{
 		int finalWidth = 0;
+		
+		if (widthIsNotZero)
+		{
+			finalWidth = width;
+			widthIsNotZero = false;
+		}
 		
 		for (int i = 0; i < matrixData.size(); i++)
 		{

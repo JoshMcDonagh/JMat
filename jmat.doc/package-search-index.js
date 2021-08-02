@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"main.java.matrices"},{"l":"main.java.matrices.discretisation"},{"l":"main.java.matrices.io"},{"l":"main.java.matrices.mapFunction"},{"l":"main.java.matrices.maths"},{"l":"main.java.matrices.matrixConversion"},{"l":"test.java.matrices"}]
