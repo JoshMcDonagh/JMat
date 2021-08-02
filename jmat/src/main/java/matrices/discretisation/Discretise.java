@@ -4,20 +4,34 @@ import java.util.ArrayList;
 
 import main.java.matrices.CMatrix;
 import main.java.matrices.DMatrix;
-import main.java.matrices.utilities.MatrixUtilities;
+import main.java.matrices.Matrix;
 
-public class Discretise 
+/**
+ * Interface which is used to access the static methods that control matrix discretisation.
+ * Note that matrix discretisation can only be performed on dMatrix objects.
+ * 
+ * @author Joshua McDonagh
+ *
+ */
+public interface Discretise 
 {
+	/**
+	 * Discretises matrix content by the frequency of values.
+	 * @param doubleMatrix Matrix to be discretised
+	 * @param numOfBins Number of bins to use for discretisation
+	 * @return Discretised comparable matrix containing string values
+	 */
 	public static CMatrix<String> byFrequency(DMatrix doubleMatrix, int numOfBins)
 	{
 		ArrayList<ArrayList<Bin>> bins = new ArrayList<ArrayList<Bin>>();
 		
 		int frequency = (int) Math.ceil((double) doubleMatrix.height() / (double) numOfBins);
 		
+		// Splits the data up into bins
 		for (int i = 0; i < doubleMatrix.width(); i++)
 		{
 			bins.add(new ArrayList<Bin>());
-			DMatrix matrixColumn = MatrixUtilities.sort(0, doubleMatrix.getColumns(i, i + 1));
+			DMatrix matrixColumn = Matrix.sort(0, doubleMatrix.getColumns(i, i + 1));
 			for (int j = 0; j < numOfBins; j++)
 			{
 				String binValue = "" + j;
@@ -44,10 +58,17 @@ public class Discretise
 		return buildFromBins(doubleMatrix, bins);
 	}
 	
+	/**
+	 * Discretises matrix content by the width of the matrix.
+	 * @param doubleMatrix Matrix to be discretised
+	 * @param numOfBins Number of bins to use for discretisation
+	 * @return Discretised comparable matrix containing string values
+	 */
 	public static CMatrix<String> byWidth(DMatrix doubleMatrix, int numOfBins)
 	{
 		ArrayList<ArrayList<Bin>> bins = new ArrayList<ArrayList<Bin>>();
 		
+		// Splits the data up into bins
 		for (int i = 0; i < doubleMatrix.width(); i++)
 		{
 			bins.add(new ArrayList<Bin>());
@@ -69,13 +90,21 @@ public class Discretise
 			}
 		}
 		
+		// Constructs and returns the final discretised matrix
 		return buildFromBins(doubleMatrix, bins);
 	}
 	
+	/**
+	 * Combines the content of bins to build the discretised matrix.
+	 * @param doubleMatrix Matrix to be discretised
+	 * @param bins Bins to be utilised to discretise the matrix
+	 * @return Discretised comparable matrix containing string values
+	 */
 	private static CMatrix<String> buildFromBins(DMatrix doubleMatrix, ArrayList<ArrayList<Bin>> bins)
 	{
 		CMatrix<String> discreteMatrix = new CMatrix<String>(doubleMatrix.height(), doubleMatrix.width());
 		
+		// Uses the bins to construct the final discretised matrix
 		for (int i = 0; i < discreteMatrix.height(); i++)
 		{
 			for (int j = 0; j < discreteMatrix.width(); j++)

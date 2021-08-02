@@ -3,10 +3,21 @@ package main.java.matrices.maths;
 import java.util.ArrayList;
 
 import main.java.matrices.DMatrix;
-import main.java.matrices.utilities.MatrixUtilities;
+import main.java.matrices.Matrix;
 
-public class MatMaths 
+/**
+ * Interface which is used to access static methods that apple mathematical operations to DMatrix objects.
+ * 
+ * @author Joshua McDonagh
+ *
+ */
+public interface MatMaths 
 {
+	/**
+	 * Calculates the determinant of a given double matrix.
+	 * @param matrix Double matrix to calculate the determinant from
+	 * @return Double value representing the determinant of the double matrix
+	 */
 	public static double det(DMatrix matrix)
 	{
 		if (!matrix.isSquare())
@@ -39,7 +50,7 @@ public class MatMaths
 			{
 				DMatrix subMatrix1 = subMatrix.getColumns(0, i);
 				DMatrix subMatrix2 = subMatrix.getColumns(i + 1, subMatrix.width());
-				subMatrix = MatrixUtilities.mergeDoubleHorizontally(subMatrix1, subMatrix2);
+				subMatrix = (DMatrix) Matrix.mergeHorizontally(subMatrix1, subMatrix2);
 			}
 			
 			values.add(value * det(subMatrix));
@@ -59,6 +70,11 @@ public class MatMaths
 	}
 	
 	// https://www.dcode.fr/matrix-minors
+	/**
+	 * Calculates the minors of a given double matrix.
+	 * @param matrix Double matrix to calculate the minors from
+	 * @return Double matrix representing the minors of the given double matrix
+	 */
 	public static DMatrix minorOf(DMatrix matrix)
 	{
 		if (!matrix.isSquare())
@@ -93,7 +109,7 @@ public class MatMaths
 				{
 					DMatrix matrix1 = matrix.getRows(0, i);
 					DMatrix matrix2 = matrix.getRows(i + 1, matrix.height());
-					subMatrix = MatrixUtilities.mergeDoubleVertically(matrix1, matrix2);
+					subMatrix = (DMatrix) Matrix.mergeVertically(matrix1, matrix2);
 				}
 				
 				if (j == 0)
@@ -104,7 +120,7 @@ public class MatMaths
 				{
 					DMatrix matrix1 = subMatrix.getColumns(0, j);
 					DMatrix matrix2 = subMatrix.getColumns(j + 1, matrix.width());
-					subMatrix = MatrixUtilities.mergeDoubleHorizontally(matrix1, matrix2);
+					subMatrix = (DMatrix) Matrix.mergeHorizontally(matrix1, matrix2);
 				}
 				
 				minorMatrix.set(i, j, det(subMatrix));
@@ -114,6 +130,11 @@ public class MatMaths
 		return minorMatrix;
 	}
 	
+	/**
+	 * Generates the cofactor matrix from a given double matrix.
+	 * @param matrix Double matrix to construct the cofactor matrix from
+	 * @return Double matrix representing the cofactor matrix
+	 */
 	public static DMatrix cofactorOf(DMatrix matrix)
 	{
 		if (!matrix.isSquare())
@@ -139,18 +160,34 @@ public class MatMaths
 		return cofactorMatrix;
 	}
 	
+	/**
+	 * Generates the adjoint matrix from a given double matrix.
+	 * @param matrix Double matrix to construct the adjoint matrix from
+	 * @return Double matrix representing the adjoint matrix
+	 */
 	public static DMatrix adj(DMatrix matrix)
 	{
 		return cofactorOf(matrix).transpose();
 	}
 	
+	/**
+	 * Generates the inverse of a double matrix.
+	 * @param matrix Double matrix to construct the inverse from
+	 * @return Double matrix representing the inverse of the given double matrix
+	 */
 	public static DMatrix inv(DMatrix matrix)
 	{
 		return mul((1 / det(matrix)), adj(matrix));
 	}
 	
-	// Addition methods
+	// !!! Addition methods !!!
 	
+	/**
+	 * Performs addition on two double matrices.
+	 * @param matrix1 The first double matrix for addition
+	 * @param matrix2 The second double matrix for addition
+	 * @return The double matrix representing the addition of both given double matrices
+	 */
 	public static DMatrix add(DMatrix matrix1, DMatrix matrix2)
 	{
 		if (matrix1.height() != matrix2.height() || matrix1.width() != matrix2.width())
@@ -167,6 +204,12 @@ public class MatMaths
 		return newMatrix;
 	}
 	
+	/**
+	 * Performs addition on a double matrix and a double scalar value.
+	 * @param matrix The double matrix for addition
+	 * @param scalar The double scalar value for addition
+	 * @return The double matrix representing the addition of the double matrix and double scalar value
+	 */
 	public static DMatrix add(DMatrix matrix, double scalar)
 	{
 		DMatrix newMatrix = matrix.clone();
@@ -174,13 +217,25 @@ public class MatMaths
 		return newMatrix;
 	}
 	
+	/**
+	 * Performs addition on a double scalar value and a double matrix.
+	 * @param scalar The double scalar value for addition
+	 * @param matrix The double matrix for addition
+	 * @return The double matrix representing the addition of the double scalar value and the double matrix
+	 */
 	public static DMatrix add(double scalar, DMatrix matrix)
 	{
 		return add(matrix, scalar);
 	}
 	
-	// Subtraction methods
+	// !!! Subtraction methods !!!
 	
+	/**
+	 * Performs subtraction on two double matrices.
+	 * @param matrix1 The first double matrix for subtraction 
+	 * @param matrix2 The second double matrix for subtraction
+	 * @return The double matrix representing the subtraction of both given double matrices
+	 */
 	public static DMatrix sub(DMatrix matrix1, DMatrix matrix2)
 	{
 		if (matrix1.height() != matrix2.height() || matrix1.width() != matrix2.width())
@@ -197,6 +252,12 @@ public class MatMaths
 		return newMatrix;
 	}
 	
+	/**
+	 * Performs subtraction on a double matrix and a double scalar value.
+	 * @param matrix The double matrix for subtraction
+	 * @param scalar The double scalar value for subtraction
+	 * @return The double matrix representing the subtraction of the double matrix and the double scalar value
+	 */
 	public static DMatrix sub(DMatrix matrix, double scalar)
 	{
 		DMatrix newMatrix = matrix.clone();
@@ -204,6 +265,12 @@ public class MatMaths
 		return newMatrix;
 	}
 	
+	/**
+	 * Performs subtraction on a double scalar value and a double matrix.
+	 * @param scalar The double scalar value for subtraction
+	 * @param matrix The double matrix for subtraction
+	 * @return The double matrix representing the subtraction of the double scalar value and the double matrix
+	 */
 	public static DMatrix sub(double scalar, DMatrix matrix)
 	{
 		DMatrix newMatrix = matrix.clone();
@@ -211,8 +278,14 @@ public class MatMaths
 		return newMatrix;
 	}
 	
-	// Multiplication methods
+	// !!! Multiplication methods !!!
 	
+	/**
+	 * Performs multiplication on two double matrices.
+	 * @param matrix1 The first double matrix for multiplication
+	 * @param matrix2 The second double matrix for multiplication
+	 * @return The double matrix representing the multiplication of both given double matrices
+	 */
 	public static DMatrix mul(DMatrix matrix1, DMatrix matrix2)
 	{
 		if (matrix1.width() != matrix2.height())
@@ -236,6 +309,12 @@ public class MatMaths
 		return newMatrix;
 	}
 	
+	/**
+	 * Performs multiplication on a double matrix and a double scalar value.
+	 * @param matrix The double matrix for multiplication
+	 * @param scalar The double scalar value for multiplication
+	 * @return The double matrix representing the multiplication of the double matrix and the double scalar value
+	 */
 	public static DMatrix mul(DMatrix matrix, double scalar)
 	{
 		DMatrix newMatrix = matrix.clone();
@@ -243,20 +322,32 @@ public class MatMaths
 		return newMatrix;
 	}
 	
+	/**
+	 * Performs multiplication on a double scalar value and a double matrix.
+	 * @param scalar The double scalar value for multiplication
+	 * @param dMatrix The double matrix for multiplication
+	 * @return The double matrix representing the multiplication of the double scalar value and the double matrix
+	 */
 	public static DMatrix mul(double scalar, DMatrix dMatrix)
 	{
 		return mul(dMatrix, scalar);
 	}
 	
-	// Power method
+	// !!! Power method !!!
 	
+	/**
+	 * Calculates a given double matrix to the power of an integer value.
+	 * @param matrix Double matrix to calculate the power from
+	 * @param power The integer value to use as the exponent
+	 * @return The double matrix representing the given matrix to the power of the given integer value
+	 */
 	public static DMatrix pow(DMatrix matrix, int power)
 	{
 		if (!matrix.isSquare())
 			throw new IllegalArgumentException("For power of, the matrix must be square.");
 		
 		if (power == 0)
-			return MatrixUtilities.makeIdentityMatrix(matrix.height());
+			return Matrix.makeIdentityMatrix(matrix.height());
 		
 		if (power < 0)
 		{
@@ -272,8 +363,14 @@ public class MatMaths
 		return newMatrix;
 	}
 	
-	// Matrix right divide methods
+	// !!! Matrix right divide method !!!
 	
+	/**
+	 * Performs right division on two given double matrices.
+	 * @param matrix1 The first double matrix for right division
+	 * @param matrix2 The second double matrix for right division
+	 * @return The double matrix representing the right division of the two double matrices
+	 */
 	public static DMatrix rDiv(DMatrix matrix1, DMatrix matrix2)
 	{
 		if (!matrix1.isSquare() || !matrix2.isSquare())
@@ -282,8 +379,14 @@ public class MatMaths
 		return mul(matrix1, inv(matrix2));
 	}
 	
-	// Matrix left divide methods
+	// !!! Matrix left divide method !!!
 	
+	/**
+	 * Performs left division on two given double matrices.
+	 * @param matrix1 The first double matrix for left division
+	 * @param matrix2 The second double matrix for left division
+	 * @return The double matrix representing the left division of the two double matrices
+	 */
 	public static DMatrix lDiv(DMatrix matrix1, DMatrix matrix2)
 	{
 		if (!matrix1.isSquare() || !matrix2.isSquare())
