@@ -1,5 +1,7 @@
 package test.java.matrices;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Arrays;
@@ -277,7 +279,7 @@ class CMatrixTest
 		CMatrix<Integer> matrix1 = new CMatrix<Integer>(integers1);
 		CMatrix<Integer> matrix2 = new CMatrix<Integer>(integers2);
 		
-		assertEquals(matrix1.contains(matrix2), true);
+		assertTrue(matrix1.contains(matrix2));
 	}
 	
 	@Test
@@ -297,7 +299,7 @@ class CMatrixTest
 		CMatrix<Integer> matrix1 = new CMatrix<Integer>(integers1);
 		CMatrix<Integer> matrix2 = new CMatrix<Integer>(integers2);
 		
-		assertEquals(matrix1.contains(matrix2), false);
+		assertFalse(matrix1.contains(matrix2));
 	}
 	
 	@Test

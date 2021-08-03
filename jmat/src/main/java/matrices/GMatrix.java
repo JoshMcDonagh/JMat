@@ -285,9 +285,19 @@ public class GMatrix<T> implements Matrix, Iterable<T>
 	 */
 	public void insertRows(int row, GMatrix<T> newRows)
 	{
+		ArrayList<ArrayList<T>> newMatrixData = new ArrayList<ArrayList<T>>();
 		ArrayList<ArrayList<T>> newRowData = newRows.matrixData;
-		for (int i = newRowData.size() - 1; i >= 0; i--)
-			matrixData.add(newRowData.get(i));
+		
+		for (int i = 0; i < row; i++)
+			newMatrixData.add(matrixData.get(i));
+		
+		for (int i = 0; i < newRowData.size(); i++)
+			newMatrixData.add(newRowData.get(i));
+		
+		for (int i = row; i < matrixData.size(); i++)
+			newMatrixData.add(matrixData.get(i));
+		
+		matrixData = newMatrixData;
 		normalise();
 	}
 	
@@ -399,15 +409,14 @@ public class GMatrix<T> implements Matrix, Iterable<T>
 	 * Converts the matrix into a 2D array.
 	 * @return A 2D array containing the matrix's values
 	 */
-	@SuppressWarnings("unchecked")
-	public T[][] toArray()
+	public Object[][] toArray()
 	{
 		Object[][] array = new Object[matrixData.size()][];
 		
 		for (int i = 0; i < matrixData.size(); i++)
 			array[i] = (matrixData.get(i).toArray());
 		
-		return (T[][]) array;
+		return array;
 	}
 	
 	/**
