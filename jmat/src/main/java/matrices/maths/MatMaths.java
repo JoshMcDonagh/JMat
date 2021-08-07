@@ -135,7 +135,7 @@ public interface MatMaths
 	 * @param matrix Double matrix to construct the cofactor matrix from
 	 * @return Double matrix representing the cofactor matrix
 	 */
-	public static DMatrix cofactorOf(DMatrix matrix)
+	public static DMatrix cofactorsOf(DMatrix matrix)
 	{
 		if (!matrix.isSquare())
 			throw new IllegalArgumentException("To find the cofactors, the matrix must be square.");
@@ -167,7 +167,7 @@ public interface MatMaths
 	 */
 	public static DMatrix adj(DMatrix matrix)
 	{
-		return cofactorOf(matrix).transpose();
+		return cofactorsOf(matrix).transpose();
 	}
 	
 	/**
@@ -360,6 +360,45 @@ public interface MatMaths
 		for (int i = 0; i < power - 1; i++)
 			newMatrix = mul(newMatrix, matrix);
 		
+		return newMatrix;
+	}
+	
+	// !!! Division methods !!!
+	
+	/**
+	 * Performs division on two double matrices.
+	 * @param matrix1 The first double matrix for division
+	 * @param matrix2 The second double matrix for division
+	 * @return The double matrix representing the division of both given double matrices
+	 */
+	public static DMatrix div(DMatrix matrix1, DMatrix matrix2)
+	{
+		return rDiv(matrix1, matrix2);
+	}
+	
+	/**
+	 * Performs division on a double matrix and a double scalar value.
+	 * @param matrix The double matrix for division
+	 * @param scalar The double scalar value for division
+	 * @return The double matrix representing the division of the double matrix and the double scalar value
+	 */
+	public static DMatrix div(DMatrix matrix, double scalar)
+	{
+		DMatrix newMatrix = matrix.clone();
+		newMatrix.map(val -> (double) val / scalar);
+		return newMatrix;
+	}
+	
+	/**
+	 * Performs division on a double scalar value and a double matrix.
+	 * @param scalar The double scalar value for division
+	 * @param dMatrix The double matrix for division
+	 * @return The double matrix representing the division of the double scalar value and the double matrix
+	 */
+	public static DMatrix div(double scalar, DMatrix matrix)
+	{
+		DMatrix newMatrix = matrix.clone();
+		newMatrix.map(val -> scalar / (double) val);
 		return newMatrix;
 	}
 	

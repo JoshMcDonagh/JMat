@@ -5,3 +5,5 @@ main.java.matrices.mapFunction
 main.java.matrices.maths
 main.java.matrices.matrixConversion
 test.java.matrices
+test.java.matrices.discretisation
+test.java.matrices.maths
