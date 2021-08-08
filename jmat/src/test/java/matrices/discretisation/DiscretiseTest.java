@@ -16,51 +16,7 @@ import main.java.matrices.discretisation.Discretise;
 class DiscretiseTest 
 {
 	@Test
-	void byFrequency() 
-	{
-		Double[][] doubles = {
-				{1.0, 9.0},
-				{2.0, 4.0},
-				{3.0, 2.0},
-				{4.0, 6.0},
-				{5.0, 3.0},
-				{6.0, 7.0},
-				{7.0, 10.0},
-				{8.0, 1.0},
-				{8.0, 8.0},
-				{10.0, 7.0}
-		};
-		
-		String[][] strings = {
-				{"0", "4"},
-				{"0", "1"},
-				{"1", "0"},
-				{"1", "2"},
-				{"2", "1"},
-				{"2", "2"},
-				{"3", "4"},
-				{"3", "0"},
-				{"3", "3"},
-				{"4", "2"}
-		};
-		
-		int numOfBins = 5;
-		
-		DMatrix matrix = new DMatrix(doubles);
-		CMatrix<String> discMatrix = Discretise.byFrequency(matrix, numOfBins);
-		
-		assertEquals(discMatrix.height(), strings.length);
-		assertEquals(discMatrix.width(), strings[0].length);
-		
-		for (int i = 0; i < discMatrix.height(); i++)
-		{
-			for (int j = 0; j < discMatrix.width(); j++)
-				assertEquals(discMatrix.get(i, j), strings[i][j]);
-		}
-	}
-	
-	@Test
-	void byWidth()
+	void byFrequency()
 	{
 		Double[][] doubles = {
 				{14.0, 90.0},
@@ -86,6 +42,50 @@ class DiscretiseTest
 				{"3", "0"},
 				{"4", "3"},
 				{"4", "2"}
+		};
+		
+		int numOfBins = 5;
+		
+		DMatrix matrix = new DMatrix(doubles);
+		CMatrix<String> discMatrix = Discretise.byFrequency(matrix, numOfBins);
+		
+		assertEquals(discMatrix.height(), strings.length);
+		assertEquals(discMatrix.width(), strings[0].length);
+		
+		for (int i = 0; i < discMatrix.height(); i++)
+		{
+			for (int j = 0; j < discMatrix.width(); j++)
+				assertEquals(discMatrix.get(i, j), strings[i][j]);
+		}
+	}
+	
+	@Test
+	void byWidth() 
+	{
+		Double[][] doubles = {
+				{1.0, 9.0},
+				{2.0, 4.0},
+				{3.0, 2.0},
+				{4.0, 6.0},
+				{5.0, 3.0},
+				{6.0, 7.0},
+				{7.0, 10.0},
+				{8.0, 1.0},
+				{8.0, 8.0},
+				{10.0, 7.0}
+		};
+		
+		String[][] strings = {
+				{"0", "4"},
+				{"0", "1"},
+				{"1", "0"},
+				{"1", "2"},
+				{"2", "1"},
+				{"2", "3"},
+				{"3", "4"},
+				{"3", "0"},
+				{"3", "3"},
+				{"4", "3"}
 		};
 		
 		int numOfBins = 5;

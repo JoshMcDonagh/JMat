@@ -392,7 +392,7 @@ public interface MatMaths
 	/**
 	 * Performs division on a double scalar value and a double matrix.
 	 * @param scalar The double scalar value for division
-	 * @param dMatrix The double matrix for division
+	 * @param matrix The double matrix for division
 	 * @return The double matrix representing the division of the double scalar value and the double matrix
 	 */
 	public static DMatrix div(double scalar, DMatrix matrix)
