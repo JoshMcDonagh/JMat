@@ -1,8 +1,4 @@
-package main.java.matrices.matrixConversion;
-
-import main.java.matrices.CMatrix;
-import main.java.matrices.DMatrix;
-import main.java.matrices.GMatrix;
+package main.java.matrices;
 
 /**
  * Interface which is used to access static methods that provide functionality to convert matrices between matrix types.

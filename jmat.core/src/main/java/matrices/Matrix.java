@@ -2,9 +2,6 @@ package main.java.matrices;
 
 import java.util.Iterator;
 
-import main.java.matrices.mapFunction.MapFunction;
-import main.java.matrices.matrixConversion.ConvertMatrix;
-
 /**
  * Interface is the base for all matrix classes and provides access to useful static method functionality.
  * 

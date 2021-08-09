@@ -1,13 +1,13 @@
-package test.java.matrices.matrixConversion;
+package test.java.matrices;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
 import main.java.matrices.CMatrix;
+import main.java.matrices.ConvertMatrix;
 import main.java.matrices.DMatrix;
 import main.java.matrices.GMatrix;
-import main.java.matrices.matrixConversion.ConvertMatrix;
 
 /**
  * 

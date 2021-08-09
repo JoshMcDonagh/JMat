@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 
-import main.java.matrices.mapFunction.MapFunction;
-
 /**
  * This iterator represents a generic matrix that can contain any object.
  * This allows for general and basic matrix functionality for any given object type.

@@ -2,8 +2,6 @@ package main.java.matrices;
 
 import java.util.Random;
 
-import main.java.matrices.matrixConversion.ConvertMatrix;
-
 /**
  * This CMatrix establishes itself as a comparable matrix using the double generic type, 
  * and represents a double matrix.

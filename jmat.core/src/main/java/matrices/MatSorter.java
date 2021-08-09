@@ -2,8 +2,6 @@ package main.java.matrices;
 
 import java.util.ArrayList;
 
-import main.java.matrices.matrixConversion.ConvertMatrix;
-
 /**
  * Interface which is used to access static methods that provide matrix sorting functionality.
  * 

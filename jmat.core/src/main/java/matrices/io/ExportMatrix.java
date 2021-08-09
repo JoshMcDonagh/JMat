@@ -5,9 +5,9 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
 import main.java.matrices.CMatrix;
+import main.java.matrices.ConvertMatrix;
 import main.java.matrices.DMatrix;
 import main.java.matrices.GMatrix;
-import main.java.matrices.matrixConversion.ConvertMatrix;
 
 /**
  * Interface which is used to access static methods that control the exporting of matrices to external files.

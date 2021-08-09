@@ -1,12 +1,12 @@
-package test.java.matrices.maths;
+package test.java.matrices;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
 import main.java.matrices.DMatrix;
+import main.java.matrices.MatMaths;
 import main.java.matrices.Matrix;
-import main.java.matrices.maths.MatMaths;
 
 /**
  * 

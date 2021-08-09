@@ -2,8 +2,6 @@ package main.java.matrices;
 
 import java.util.ArrayList;
 
-import main.java.matrices.matrixConversion.ConvertMatrix;
-
 /**
  * This GMatrix represents a comparable matrix that contains comparable objects.
  * This allows for further functionality to be applied to matrices that require comparing matrix content.

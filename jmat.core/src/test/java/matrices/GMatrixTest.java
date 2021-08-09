@@ -9,7 +9,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import main.java.matrices.GMatrix;
-import main.java.matrices.mapFunction.MapFunction;
+import main.java.matrices.MapFunction;
 
 /**
  * 

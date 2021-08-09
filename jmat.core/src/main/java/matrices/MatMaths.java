@@ -1,9 +1,6 @@
-package main.java.matrices.maths;
+package main.java.matrices;
 
 import java.util.ArrayList;
-
-import main.java.matrices.DMatrix;
-import main.java.matrices.Matrix;
 
 /**
  * Interface which is used to access static methods that apple mathematical operations to DMatrix objects.
@@ -69,7 +66,6 @@ public interface MatMaths
 		return finalValue;
 	}
 	
-	// https://www.dcode.fr/matrix-minors
 	/**
 	 * Calculates the minors of a given double matrix.
 	 * @param matrix Double matrix to calculate the minors from

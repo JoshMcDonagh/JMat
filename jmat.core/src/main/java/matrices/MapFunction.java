@@ -1,4 +1,4 @@
-package main.java.matrices.mapFunction;
+package main.java.matrices;
 
 /**
  * Used by the GMatrix class as a functional interface for the map method which maps a function across all values of the matrix.
