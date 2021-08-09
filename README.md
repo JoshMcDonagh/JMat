@@ -1,2 +1,2 @@
-﻿![enter image description here](https://1.bp.blogspot.com/-HBB4foZmv4I/YPxmtma_HJI/AAAAAAAAAcY/TuLtrSs18VwJPzXNnTyyxJwWRYMOUY3dACLcBGAsYHQ/s928/Matrices+for+Java+Banner.png)
+﻿![JMat: Matrices for Java](https://1.bp.blogspot.com/-HBB4foZmv4I/YPxmtma_HJI/AAAAAAAAAcY/TuLtrSs18VwJPzXNnTyyxJwWRYMOUY3dACLcBGAsYHQ/s928/Matrices+for+Java+Banner.png)
 JMat is a library developed for Java which allows for the use and manipulation of matrices. The library handles fundamental mathematical operations on matrices, and also implements further functionality including discretisation, I/O, and sorting.
