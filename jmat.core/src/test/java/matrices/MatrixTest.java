@@ -413,7 +413,7 @@ class MatrixTest
 	
 	@Test 
 	void mergeHorizontallyDMatrixThree()
-	{
+	{				
 		Double[][] integers1 = {
 				{4.0, 7.0},
 				{2.0, 1.0},
