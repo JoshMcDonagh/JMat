@@ -373,7 +373,7 @@ public class GMatrix<T> implements Matrix, Iterable<T>
 	 */
 	public boolean isEmpty()
 	{
-		return height() == 0;
+		return height() == 0 && width() == 0;
 	}
 	
 	/**
