@@ -4,6 +4,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
@@ -200,6 +201,60 @@ class CMatrixTest
 			for (int j = 0; j < integers[i].length; j++)
 			assertEquals(integers[i][j], matrixTranspose.get(j,  i));
 		}
+	}
+	
+	@Test
+	void flattenToRow()
+	{
+		Integer[][] integers = {
+				{4, 7, 3, 5, 5},
+				{2, 1, 4, 4, 2},
+				{1, 3, 6, 4, 9}
+		};
+		
+		ArrayList<Integer> flattenedIntegers = new ArrayList<Integer>();
+		
+		for (Integer[] intList : integers)
+		{
+			for (int value : intList)
+				flattenedIntegers.add(value);
+		}
+		
+		CMatrix<Integer> matrix = new CMatrix<Integer>(integers);
+		CMatrix<Integer> flattenedMatrix = matrix.flattenToRow();
+		
+		assertEquals(flattenedMatrix.height(), 1);
+		assertEquals(flattenedMatrix.width(), flattenedIntegers.size());
+		
+		for (int i = 0; i < flattenedMatrix.width(); i++)
+			assertEquals(flattenedMatrix.get(0, i), flattenedIntegers.get(i));
+	}
+	
+	@Test
+	void flattenToColumn()
+	{
+		Integer[][] integers = {
+				{4, 7, 3, 5, 5},
+				{2, 1, 4, 4, 2},
+				{1, 3, 6, 4, 9}
+		};
+		
+		ArrayList<Integer> flattenedIntegers = new ArrayList<Integer>();
+		
+		for (Integer[] intList : integers)
+		{
+			for (int value : intList)
+				flattenedIntegers.add(value);
+		}
+		
+		CMatrix<Integer> matrix = new CMatrix<Integer>(integers);
+		CMatrix<Integer> flattenedMatrix = matrix.flattenToColumn();
+		
+		assertEquals(flattenedMatrix.height(), flattenedIntegers.size());
+		assertEquals(flattenedMatrix.width(), 1);
+		
+		for (int i = 0; i < flattenedMatrix.height(); i++)
+			assertEquals(flattenedMatrix.get(i, 0), flattenedIntegers.get(i));
 	}
 	
 	@Test

@@ -140,6 +140,24 @@ public class CMatrix<T extends Comparable<T>> extends GMatrix<T>
 	}
 	
 	/**
+	 * Flattens the matrix into a matrix consisting of a single row.
+	 * @return A flattened version of the comparable matrix
+	 */
+	public CMatrix<T> flattenToRow()
+	{
+		return ConvertMatrix.toComparable(super.flattenToRow());
+	}
+	
+	/**
+	 * Flattens the matrix into a matrix consisting of a single column.
+	 * @return A flattened version of the comparable matrix
+	 */
+	public CMatrix<T> flattenToColumn()
+	{
+		return ConvertMatrix.toComparable(super.flattenToColumn());
+	}
+	
+	/**
 	 * Generates and returns a duplicated version of the matrix.
 	 * @return A comparable matrix consisting of the same values
 	 */

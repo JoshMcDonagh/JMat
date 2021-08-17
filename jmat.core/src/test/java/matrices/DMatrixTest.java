@@ -3,6 +3,7 @@ package test.java.matrices;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
@@ -285,6 +286,60 @@ class DMatrixTest
 			for (int j = 0; j < doubles[i].length; j++)
 			assertEquals(doubles[i][j], matrixTranspose.get(j,  i));
 		}
+	}
+	
+	@Test
+	void flattenToRow()
+	{
+		Double[][] doubles = {
+				{4.0, 7.0, 3.0, 5.0, 5.0},
+				{2.0, 1.0, 4.0, 4.0, 2.0},
+				{1.0, 3.0, 6.0, 4.0, 9.0}
+		};
+		
+		ArrayList<Double> flattenedDoubles = new ArrayList<Double>();
+		
+		for (Double[] doubleList : doubles)
+		{
+			for (double value : doubleList)
+				flattenedDoubles.add(value);
+		}
+		
+		DMatrix matrix = new DMatrix(doubles);
+		DMatrix flattenedMatrix = matrix.flattenToRow();
+		
+		assertEquals(flattenedMatrix.height(), 1);
+		assertEquals(flattenedMatrix.width(), flattenedDoubles.size());
+		
+		for (int i = 0; i < flattenedMatrix.width(); i++)
+			assertEquals(flattenedMatrix.get(0, i), flattenedDoubles.get(i));
+	}
+	
+	@Test
+	void flattenToColumn()
+	{
+		Double[][] doubles = {
+				{4.0, 7.0, 3.0, 5.0, 5.0},
+				{2.0, 1.0, 4.0, 4.0, 2.0},
+				{1.0, 3.0, 6.0, 4.0, 9.0}
+		};
+		
+		ArrayList<Double> flattenedDoubles = new ArrayList<Double>();
+		
+		for (Double[] doubleList : doubles)
+		{
+			for (double value : doubleList)
+				flattenedDoubles.add(value);
+		}
+		
+		DMatrix matrix = new DMatrix(doubles);
+		DMatrix flattenedMatrix = matrix.flattenToColumn();
+		
+		assertEquals(flattenedMatrix.height(), flattenedDoubles.size());
+		assertEquals(flattenedMatrix.width(), 1);
+		
+		for (int i = 0; i < flattenedMatrix.height(); i++)
+			assertEquals(flattenedMatrix.get(i, 0), flattenedDoubles.get(i));
 	}
 	
 	@Test

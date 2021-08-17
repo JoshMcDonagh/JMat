@@ -173,6 +173,29 @@ public class GMatrix<T> implements Matrix, Iterable<T>
 	}
 	
 	/**
+	 * Appends a value to the end of a row of the matrix.
+	 * @param row Row index to append the value to
+	 * @param value The value to append to the row
+	 */
+	public void appendToRow(int row, T value)
+	{
+		matrixData.get(row).add(value);
+		normalise();
+	}
+	
+	/**
+	 * Appends a value to the end of a column of the matrix.
+	 * @param column Column index to append the value to
+	 * @param value The value to append to the column
+	 */
+	public void appendToColumn(int column, T value)
+	{
+		matrixData.add(new ArrayList<T>());
+		normalise();
+		matrixData.get(matrixData.size() - 1).set(column, value);
+	}
+	
+	/**
 	 * Method returns a set of rows from the matrix as a new generic matrix.
 	 * @param start The row index of the first row of the matrix to be extracted (inclusive)
 	 * @param end The row index of the last row of the matrix to be extracted (exclusive)
@@ -401,6 +424,34 @@ public class GMatrix<T> implements Matrix, Iterable<T>
 		}
 		
 		return new GMatrix<T>(newMatrixData);
+	}
+	
+	/**
+	 * Flattens the matrix into a matrix consisting of a single row.
+	 * @return A flattened version of the generic matrix
+	 */
+	public GMatrix<T> flattenToRow()
+	{
+		ArrayList<T> flattenedList = new ArrayList<T>();
+		
+		for (T value : this)
+			flattenedList.add(value);
+		
+		GMatrix<T> flattenedMatrix = new GMatrix<T>(1, flattenedList.size());
+		
+		for (int i = 0; i < flattenedMatrix.width(); i++)
+			flattenedMatrix.set(0, i, flattenedList.get(i));
+		
+		return flattenedMatrix;
+	}
+	
+	/**
+	 * Flattens the matrix into a matrix consisting of a single column.
+	 * @return A flattened version of the generic matrix
+	 */
+	public GMatrix<T> flattenToColumn()
+	{
+		return flattenToRow().transpose();
 	}
 	
 	/**

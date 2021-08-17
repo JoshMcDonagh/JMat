@@ -166,6 +166,24 @@ public class DMatrix extends CMatrix<Double>
 	}
 	
 	/**
+	 * Flattens the matrix into a matrix consisting of a single row.
+	 * @return A flattened version of the double matrix
+	 */
+	public DMatrix flattenToRow()
+	{
+		return ConvertMatrix.toDouble(super.flattenToRow());
+	}
+	
+	/**
+	 * Flattens the matrix into a matrix consisting of a single column.
+	 * @return A flattened version of the double matrix
+	 */
+	public DMatrix flattenToColumn()
+	{
+		return ConvertMatrix.toDouble(super.flattenToColumn());
+	}
+	
+	/**
 	 * Evaluates whether a given double matrix has the same content as this matrix.
 	 * @param dMatrix Double matrix to compare with
 	 * @return Boolean value which is {@code true} if the matrices are equal, otherwise {@code false}
