@@ -173,29 +173,6 @@ public class GMatrix<T> implements Matrix, Iterable<T>
 	}
 	
 	/**
-	 * Appends a value to the end of a row of the matrix.
-	 * @param row Row index to append the value to
-	 * @param value The value to append to the row
-	 */
-	public void appendToRow(int row, T value)
-	{
-		matrixData.get(row).add(value);
-		normalise();
-	}
-	
-	/**
-	 * Appends a value to the end of a column of the matrix.
-	 * @param column Column index to append the value to
-	 * @param value The value to append to the column
-	 */
-	public void appendToColumn(int column, T value)
-	{
-		matrixData.add(new ArrayList<T>());
-		normalise();
-		matrixData.get(matrixData.size() - 1).set(column, value);
-	}
-	
-	/**
 	 * Method returns a set of rows from the matrix as a new generic matrix.
 	 * @param start The row index of the first row of the matrix to be extracted (inclusive)
 	 * @param end The row index of the last row of the matrix to be extracted (exclusive)

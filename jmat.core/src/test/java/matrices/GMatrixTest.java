@@ -130,46 +130,6 @@ class GMatrixTest
 	}
 	
 	@Test
-	void appendToRow()
-	{
-		Integer[][] integers = {
-				{4, 7, 3},
-				{2, 1, 4}
-		};
-		
-		GMatrix<Integer> matrix = new GMatrix<Integer>(integers);
-		
-		int row = 1;
-		int column = 3;
-		int value = 7;
-		
-		matrix.appendToRow(row, value);
-		assertEquals(matrix.height(), integers.length);
-		assertEquals(matrix.width(), integers[0].length + 1);
-		assertEquals(matrix.get(row, column), value);
-	}
-	
-	@Test
-	void appendToColumn()
-	{
-		Integer[][] integers = {
-				{4, 7, 3},
-				{2, 1, 4}
-		};
-		
-		GMatrix<Integer> matrix = new GMatrix<Integer>(integers);
-		
-		int row = 2;
-		int column = 2;
-		int value = 16;
-		
-		matrix.appendToColumn(column, value);
-		assertEquals(matrix.height(), integers.length + 1);
-		assertEquals(matrix.width(), integers[0].length);
-		assertEquals(matrix.get(row, column), value);
-	}
-	
-	@Test
 	void getMultipleRows()
 	{
 		Integer[][] integers = {
