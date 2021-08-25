@@ -297,18 +297,18 @@ class MatrixTest
 	@Test
 	void mergeVerticallyDMatrixTwo()
 	{
-		Double[][] integers1 = {
+		Double[][] doubles1 = {
 				{4.0, 7.0, 3.0, 5.0, 5.0},
 				{2.0, 1.0, 4.0, 4.0, 2.0},
 				{1.0, 3.0, 6.0, 4.0, 9.0}
 		};
 		
-		Double[][] integers2 = {
+		Double[][] doubles2 = {
 				{2.0, 1.0, 4.0, 4.0, 2.0},
 				{1.0, 3.0, 6.0, 4.0, 9.0}
 		};
 		
-		Double[][] integers3 = {
+		Double[][] doubles3 = {
 				{4.0, 7.0, 3.0, 5.0, 5.0},
 				{2.0, 1.0, 4.0, 4.0, 2.0},
 				{1.0, 3.0, 6.0, 4.0, 9.0},
@@ -316,38 +316,38 @@ class MatrixTest
 				{1.0, 3.0, 6.0, 4.0, 9.0}
 		};
 		
-		DMatrix matrix1 = new DMatrix(integers1);
-		DMatrix matrix2 = new DMatrix(integers2);
+		DMatrix matrix1 = new DMatrix(doubles1);
+		DMatrix matrix2 = new DMatrix(doubles2);
 		DMatrix matrix3 = Matrix.mergeVertically(matrix1, matrix2);
 		
-		assertEquals(matrix3.height(), integers3.length);
-		assertEquals(matrix3.width(), integers3[0].length);
+		assertEquals(matrix3.height(), doubles3.length);
+		assertEquals(matrix3.width(), doubles3[0].length);
 		
-		for (int i = 0; i < integers3.length; i++)
+		for (int i = 0; i < doubles3.length; i++)
 		{
-			for (int j = 0; j < integers3[i].length; j++)
-				assertEquals(matrix3.get(i, j), integers3[i][j]);
+			for (int j = 0; j < doubles3[i].length; j++)
+				assertEquals(matrix3.get(i, j), doubles3[i][j]);
 		}
 	}
 	
 	@Test
 	void mergeVerticallyDMatrixThree()
 	{
-		Double[][] integers1 = {
+		Double[][] doubles1 = {
 				{4.0, 7.0, 3.0, 5.0, 5.0},
 				{2.0, 1.0, 4.0, 4.0, 2.0}
 		};
 		
-		Double[][] integers2 = {
+		Double[][] doubles2 = {
 				{1.0, 3.0, 6.0, 4.0, 9.0}
 		};
 		
-		Double[][] integers3 = {
+		Double[][] doubles3 = {
 				{2.0, 1.0, 4.0, 4.0, 2.0},
 				{1.0, 3.0, 6.0, 4.0, 9.0}
 		};
 		
-		Double[][] integers4 = {
+		Double[][] doubles4 = {
 				{4.0, 7.0, 3.0, 5.0, 5.0},
 				{2.0, 1.0, 4.0, 4.0, 2.0},
 				{1.0, 3.0, 6.0, 4.0, 9.0},
@@ -355,25 +355,25 @@ class MatrixTest
 				{1.0, 3.0, 6.0, 4.0, 9.0}
 		};
 		
-		DMatrix matrix1 = new DMatrix(integers1);
-		DMatrix matrix2 = new DMatrix(integers2);
-		DMatrix matrix3 = new DMatrix(integers3);
+		DMatrix matrix1 = new DMatrix(doubles1);
+		DMatrix matrix2 = new DMatrix(doubles2);
+		DMatrix matrix3 = new DMatrix(doubles3);
 		DMatrix matrix4 = Matrix.mergeVertically(matrix1, matrix2, matrix3);
 		
-		assertEquals(matrix4.height(), integers4.length);
-		assertEquals(matrix4.width(), integers4[0].length);
+		assertEquals(matrix4.height(), doubles4.length);
+		assertEquals(matrix4.width(), doubles4[0].length);
 		
-		for (int i = 0; i < integers4.length; i++)
+		for (int i = 0; i < doubles4.length; i++)
 		{
-			for (int j = 0; j < integers4[i].length; j++)
-				assertEquals(matrix4.get(i, j), integers4[i][j]);
+			for (int j = 0; j < doubles4[i].length; j++)
+				assertEquals(matrix4.get(i, j), doubles4[i][j]);
 		}
 	}
 	
 	@Test
 	void mergeHorizontallyDMatrixTwo()
 	{
-		Double[][] integers1 = {
+		Double[][] doubles1 = {
 				{4.0, 7.0, 3.0},
 				{2.0, 1.0, 4.0},
 				{1.0, 3.0, 6.0},
@@ -381,7 +381,7 @@ class MatrixTest
 				{1.0, 3.0, 6.0}
 		};
 		
-		Double[][] integers2 = {
+		Double[][] doubles2 = {
 				{5.0, 5.0},
 				{4.0, 2.0},
 				{4.0, 9.0},
@@ -389,7 +389,7 @@ class MatrixTest
 				{4.0, 9.0}
 		};
 		
-		Double[][] integers3 = {
+		Double[][] doubles3 = {
 				{4.0, 7.0, 3.0, 5.0, 5.0},
 				{2.0, 1.0, 4.0, 4.0, 2.0},
 				{1.0, 3.0, 6.0, 4.0, 9.0},
@@ -397,24 +397,24 @@ class MatrixTest
 				{1.0, 3.0, 6.0, 4.0, 9.0}
 		};
 		
-		DMatrix matrix1 = new DMatrix(integers1);
-		DMatrix matrix2 = new DMatrix(integers2);
+		DMatrix matrix1 = new DMatrix(doubles1);
+		DMatrix matrix2 = new DMatrix(doubles2);
 		DMatrix matrix3 = Matrix.mergeHorizontally(matrix1, matrix2);
 		
-		assertEquals(matrix3.height(), integers3.length);
-		assertEquals(matrix3.width(), integers3[0].length);
+		assertEquals(matrix3.height(), doubles3.length);
+		assertEquals(matrix3.width(), doubles3[0].length);
 		
-		for (int i = 0; i < integers3.length; i++)
+		for (int i = 0; i < doubles3.length; i++)
 		{
-			for (int j = 0; j < integers3[i].length; j++)
-				assertEquals(matrix3.get(i, j), integers3[i][j]);
+			for (int j = 0; j < doubles3[i].length; j++)
+				assertEquals(matrix3.get(i, j), doubles3[i][j]);
 		}
 	}
 	
 	@Test 
 	void mergeHorizontallyDMatrixThree()
 	{				
-		Double[][] integers1 = {
+		Double[][] doubles1 = {
 				{4.0, 7.0},
 				{2.0, 1.0},
 				{1.0, 3.0},
@@ -422,7 +422,7 @@ class MatrixTest
 				{1.0, 3.0}
 		};
 		
-		Double[][] integers2 = {
+		Double[][] doubles2 = {
 				{3.0},
 				{4.0},
 				{6.0},
@@ -430,7 +430,7 @@ class MatrixTest
 				{6.0}
 		};
 		
-		Double[][] integers3 = {
+		Double[][] doubles3 = {
 				{5.0, 5.0},
 				{4.0, 2.0},
 				{4.0, 9.0},
@@ -438,7 +438,7 @@ class MatrixTest
 				{4.0, 9.0}
 		};
 		
-		Double[][] integers4 = {
+		Double[][] doubles4 = {
 				{4.0, 7.0, 3.0, 5.0, 5.0},
 				{2.0, 1.0, 4.0, 4.0, 2.0},
 				{1.0, 3.0, 6.0, 4.0, 9.0},
@@ -446,18 +446,18 @@ class MatrixTest
 				{1.0, 3.0, 6.0, 4.0, 9.0}
 		};
 		
-		DMatrix matrix1 = new DMatrix(integers1);
-		DMatrix matrix2 = new DMatrix(integers2);
-		DMatrix matrix3 = new DMatrix(integers3);
+		DMatrix matrix1 = new DMatrix(doubles1);
+		DMatrix matrix2 = new DMatrix(doubles2);
+		DMatrix matrix3 = new DMatrix(doubles3);
 		DMatrix matrix4 = Matrix.mergeHorizontally(matrix1, matrix2, matrix3);
 		
-		assertEquals(matrix4.height(), integers4.length);
-		assertEquals(matrix4.width(), integers4[0].length);
+		assertEquals(matrix4.height(), doubles4.length);
+		assertEquals(matrix4.width(), doubles4[0].length);
 		
-		for (int i = 0; i < integers4.length; i++)
+		for (int i = 0; i < doubles4.length; i++)
 		{
-			for (int j = 0; j < integers4[i].length; j++)
-				assertEquals(matrix4.get(i, j), integers4[i][j]);
+			for (int j = 0; j < doubles4[i].length; j++)
+				assertEquals(matrix4.get(i, j), doubles4[i][j]);
 		}
 	}
 }

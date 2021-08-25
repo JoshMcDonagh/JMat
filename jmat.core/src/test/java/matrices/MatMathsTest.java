@@ -55,7 +55,7 @@ class MatMathsTest
 		DMatrix matrix1 = new DMatrix(doubles1);
 		DMatrix matrix2 = new DMatrix(doubles2);
 		
-		assertTrue(MatMaths.minorOf(matrix1).equalTo(matrix2));
+		assertTrue(MatMaths.minorsOf(matrix1).equalTo(matrix2));
 	}
 	
 	@Test

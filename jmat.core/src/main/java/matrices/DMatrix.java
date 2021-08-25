@@ -12,7 +12,7 @@ import java.util.Random;
  */
 public class DMatrix extends CMatrix<Double>
 {
-	private final static double emptyVal = 0;
+	private final static double defaultEmptyVal = 0;
 	private static Random random = new Random();
 	
 	/**
@@ -20,7 +20,7 @@ public class DMatrix extends CMatrix<Double>
 	 */
 	public DMatrix()
 	{
-		super(emptyVal);
+		super(defaultEmptyVal);
 	}
 	
 	/**
@@ -30,7 +30,7 @@ public class DMatrix extends CMatrix<Double>
 	 */
 	public DMatrix(int height, int width)
 	{
-		super(emptyVal, height, width);
+		super(defaultEmptyVal, height, width);
 	}
 	
 	/**
@@ -39,7 +39,7 @@ public class DMatrix extends CMatrix<Double>
 	 */
 	public DMatrix(Double[][] values)
 	{
-		super(emptyVal, values);
+		super(defaultEmptyVal, values);
 	}
 	
 	/**

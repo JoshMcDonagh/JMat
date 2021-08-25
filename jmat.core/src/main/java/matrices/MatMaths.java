@@ -71,7 +71,7 @@ public interface MatMaths
 	 * @param matrix Double matrix to calculate the minors from
 	 * @return Double matrix representing the minors of the given double matrix
 	 */
-	public static DMatrix minorOf(DMatrix matrix)
+	public static DMatrix minorsOf(DMatrix matrix)
 	{
 		if (!matrix.isSquare())
 			throw new IllegalArgumentException("To find the minors, the matrix must be square.");
@@ -139,7 +139,7 @@ public interface MatMaths
 		if (matrix.width() == 0)
 			throw new IllegalArgumentException("To find the cofactors, the matrix must not be empty.");
 		
-		DMatrix cofactorMatrix = minorOf(matrix);
+		DMatrix cofactorMatrix = minorsOf(matrix);
 		
 		for (int i = 0; i < cofactorMatrix.height(); i++)
 		{
