@@ -67,6 +67,24 @@ public interface MatMaths
 	}
 	
 	/**
+	 * Calculates the trace of a given double matrix.
+	 * @param matrix Double matrix to calculate the trace from
+	 * @return Double value representing the trace of the double matrix
+	 */
+	public static double traceOf(DMatrix matrix)
+	{
+		if (!matrix.isSquare())
+			throw new IllegalArgumentException("To find the cofactors, the matrix must be square.");
+		
+		double traceSum = 0;
+		
+		for (int i = 0; i < matrix.height(); i++)
+			traceSum += matrix.get(i, i);
+		
+		return traceSum;
+	}
+	
+	/**
 	 * Calculates the minors of a given double matrix.
 	 * @param matrix Double matrix to calculate the minors from
 	 * @return Double matrix representing the minors of the given double matrix

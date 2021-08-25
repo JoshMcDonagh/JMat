@@ -24,7 +24,7 @@ class MatMathsTest
 	}
 	
 	@Test
-	void det()
+	void determinantOf()
 	{
 		Double[][] doubles = {
 				{5.0, 1.0, 10.0},
@@ -38,7 +38,26 @@ class MatMathsTest
 	}
 	
 	@Test
-	void minorOf()
+	void traceOf() 
+	{
+		Double[][] doubles = {
+				{2.0, 6.0, 7.0},
+				{6.0, -6.0, 8.0},
+				{0.0, 2.0, 4.0}
+		};
+		
+		double traceVal = 0;
+		
+		for (int i = 0; i < doubles.length; i++)
+			traceVal += doubles[i][i];
+		
+		DMatrix matrix = new DMatrix(doubles);
+		
+		assertEquals(MatMaths.traceOf(matrix), traceVal);
+	}
+	
+	@Test
+	void minorsOf()
 	{
 		Double[][] doubles1 = {
 				{5.0, 1.0, 10.0},
@@ -80,7 +99,7 @@ class MatMathsTest
 	}
 	
 	@Test
-	void adj()
+	void adjointOf()
 	{
 		Double[][] doubles1 = {
 				{5.0, 1.0, -10.0},
@@ -101,7 +120,7 @@ class MatMathsTest
 	}
 	
 	@Test
-	void inv()
+	void inverseOf()
 	{
 		Double[][] doubles1 = {
 				{5.0, 1.0, -10.0},
