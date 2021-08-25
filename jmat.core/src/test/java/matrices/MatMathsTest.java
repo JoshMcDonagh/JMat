@@ -20,7 +20,7 @@ class MatMathsTest
 	{
 		DMatrix matrix = Matrix.makeIdentityMatrix(3);
 		
-		assertEquals(MatMaths.det(matrix), 1);
+		assertEquals(MatMaths.determinantOf(matrix), 1);
 	}
 	
 	@Test
@@ -34,7 +34,7 @@ class MatMathsTest
 		
 		DMatrix matrix = new DMatrix(doubles);
 		
-		assertEquals(MatMaths.det(matrix), -212);
+		assertEquals(MatMaths.determinantOf(matrix), -212);
 	}
 	
 	@Test
@@ -97,7 +97,7 @@ class MatMathsTest
 		DMatrix matrix1 = new DMatrix(doubles1);
 		DMatrix matrix2 = new DMatrix(doubles2);
 		
-		assertTrue(MatMaths.adj(matrix1).equalTo(matrix2));
+		assertTrue(MatMaths.adjointOf(matrix1).equalTo(matrix2));
 	}
 	
 	@Test
@@ -110,9 +110,9 @@ class MatMathsTest
 		};
 		
 		DMatrix matrix1 = new DMatrix(doubles1);
-		DMatrix matrix2 = MatMaths.mul(1.0 / MatMaths.det(matrix1), MatMaths.adj(matrix1));
+		DMatrix matrix2 = MatMaths.mul(1.0 / MatMaths.determinantOf(matrix1), MatMaths.adjointOf(matrix1));
 		
-		assertTrue(MatMaths.inv(matrix1).equalTo(matrix2));
+		assertTrue(MatMaths.inverseOf(matrix1).equalTo(matrix2));
 	}
 	
 	@Test
@@ -492,7 +492,7 @@ class MatMathsTest
 		
 		DMatrix matrix1 = new DMatrix(doubles1);
 		DMatrix matrix2 = new DMatrix(doubles2);
-		DMatrix matrix3 = MatMaths.mul(matrix1, MatMaths.inv(matrix2));
+		DMatrix matrix3 = MatMaths.mul(matrix1, MatMaths.inverseOf(matrix2));
 		
 		assertTrue(MatMaths.rDiv(matrix1, matrix2).equalTo(matrix3));
 	}
@@ -514,7 +514,7 @@ class MatMathsTest
 		
 		DMatrix matrix1 = new DMatrix(doubles1);
 		DMatrix matrix2 = new DMatrix(doubles2);
-		DMatrix matrix3 = MatMaths.mul(MatMaths.inv(matrix1), matrix2);
+		DMatrix matrix3 = MatMaths.mul(MatMaths.inverseOf(matrix1), matrix2);
 		
 		assertTrue(MatMaths.lDiv(matrix1, matrix2).equalTo(matrix3));
 	}

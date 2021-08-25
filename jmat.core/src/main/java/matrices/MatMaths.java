@@ -15,7 +15,7 @@ public interface MatMaths
 	 * @param matrix Double matrix to calculate the determinant from
 	 * @return Double value representing the determinant of the double matrix
 	 */
-	public static double det(DMatrix matrix)
+	public static double determinantOf(DMatrix matrix)
 	{
 		if (!matrix.isSquare())
 			throw new IllegalArgumentException("To find the determinant, the matrix must be square.");
@@ -50,7 +50,7 @@ public interface MatMaths
 				subMatrix = (DMatrix) Matrix.mergeHorizontally(subMatrix1, subMatrix2);
 			}
 			
-			values.add(value * det(subMatrix));
+			values.add(value * determinantOf(subMatrix));
 		}
 		
 		double finalValue = 0;
@@ -119,7 +119,7 @@ public interface MatMaths
 					subMatrix = (DMatrix) Matrix.mergeHorizontally(matrix1, matrix2);
 				}
 				
-				minorMatrix.set(i, j, det(subMatrix));
+				minorMatrix.set(i, j, determinantOf(subMatrix));
 			}
 		}
 		
@@ -161,7 +161,7 @@ public interface MatMaths
 	 * @param matrix Double matrix to construct the adjoint matrix from
 	 * @return Double matrix representing the adjoint matrix
 	 */
-	public static DMatrix adj(DMatrix matrix)
+	public static DMatrix adjointOf(DMatrix matrix)
 	{
 		return cofactorsOf(matrix).transpose();
 	}
@@ -171,9 +171,9 @@ public interface MatMaths
 	 * @param matrix Double matrix to construct the inverse from
 	 * @return Double matrix representing the inverse of the given double matrix
 	 */
-	public static DMatrix inv(DMatrix matrix)
+	public static DMatrix inverseOf(DMatrix matrix)
 	{
-		return mul((1 / det(matrix)), adj(matrix));
+		return mul((1 / determinantOf(matrix)), adjointOf(matrix));
 	}
 	
 	// !!! Addition methods !!!
@@ -347,7 +347,7 @@ public interface MatMaths
 		
 		if (power < 0)
 		{
-			matrix = inv(matrix);
+			matrix = inverseOf(matrix);
 			power = -power;
 		}
 		
@@ -411,7 +411,7 @@ public interface MatMaths
 		if (!matrix1.isSquare() || !matrix2.isSquare())
 			throw new IllegalArgumentException("For right division, both matrices must be square.");
 		
-		return mul(matrix1, inv(matrix2));
+		return mul(matrix1, inverseOf(matrix2));
 	}
 	
 	// !!! Matrix left divide method !!!
@@ -427,6 +427,6 @@ public interface MatMaths
 		if (!matrix1.isSquare() || !matrix2.isSquare())
 			throw new IllegalArgumentException("For left division, both matrices must be square.");
 		
-		return mul(inv(matrix1), matrix2);
+		return mul(inverseOf(matrix1), matrix2);
 	}
 }
