@@ -1,4 +1,4 @@
-package test.java.matrices;
+package test.java.matrices.util;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import main.java.matrices.CMatrix;
 import main.java.matrices.DMatrix;
-import main.java.matrices.Discretise;
+import main.java.matrices.util.Discretise;
 
 /**
  * 

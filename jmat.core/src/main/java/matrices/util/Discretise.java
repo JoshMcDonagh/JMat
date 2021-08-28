@@ -1,6 +1,10 @@
-package main.java.matrices;
+package main.java.matrices.util;
 
 import java.util.ArrayList;
+
+import main.java.matrices.CMatrix;
+import main.java.matrices.DMatrix;
+import main.java.matrices.Matrix;
 
 /**
  * Interface which is used to access the static methods that control matrix discretisation.
