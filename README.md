@@ -15,7 +15,7 @@ JMat uses Gradle as the build system, with each JMat package contained in sub-fo
 
 * *jmat.core* - this is the library package which contains the fundamental matrix functionality.
 
-Within the Git foler cloned, use the following command to build the JMat library and run all of the JUnit tests:
+Within the Git folder cloned, use the following command to build the JMat library and run all of the JUnit tests:
 
 	$ gradle build
 
