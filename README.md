@@ -21,6 +21,18 @@ Within the Git foler cloned, use the following command to build the JMat library
 
 Alternatively, access https://github.com/JoshMcDonagh/JMat/releases for the latest version of the JMat library.
 
+## Donations
+
+I continue to support and develop JMat in my spare time and receive no commercial or financial advantage from it.
+
+However, if you'd like to, I'd greatly appreciate any donation you're willing to give. All the money goes towards maintaining this library and supporting me and my current studies at university.
+
+To donate, you can either follow this link:
+https://www.paypal.com/donate?hosted_button_id=RYM9L6TNB7SGC
+
+Or scan the following QR code:
+![enter image description here](https://1.bp.blogspot.com/-OCzvZJxrtz4/YTEnmNntipI/AAAAAAAAAdE/qKhC01NIC14sY84_HPpIAZRHtTGv3tkigCLcBGAsYHQ/s0/QR+code.png)
+
 ## License
 
 ```
