@@ -31,6 +31,7 @@ To donate, you can either follow this link:
 https://www.paypal.com/donate?hosted_button_id=RYM9L6TNB7SGC
 
 Or scan the following QR code:
+
 ![enter image description here](https://1.bp.blogspot.com/-OCzvZJxrtz4/YTEnmNntipI/AAAAAAAAAdE/qKhC01NIC14sY84_HPpIAZRHtTGv3tkigCLcBGAsYHQ/s0/QR+code.png)
 
 ## License
