@@ -5,6 +5,17 @@ JMat is a library developed for Java which allows for the use and manipulation o
 
 The core JMat package implements the basic matrix functionality for the whole library using three main types of matrix object: the generic matrix (`GMatrix`), the comparable matrix (`CMatrix`), and the double matrix (`DMatrix`). Using these matrix objects, use and manipulation of matrices is possible.
 
+JMat core features include:
+
+- Generating and creating matrix objects
+- Manipulating matrix objects (such as extracting matrix values, rows, and columns; inserting or deleting rows and columns; and transposition)
+- Generating identity matrices
+- Sorting matrices
+- Merging matrices
+- Performing matrix mathematics (including calculating the determinant of a matrix, the trace of a matrix, the minors of a matrix, the cofactors of a matrix, the adjoint matrix of a matrix, the inverse of a matrix, as well as performing addition, subtraction, multiplication, and division using matrices)
+- Discretising matrices with continuous values (either by frequency or by width)
+- Importing and exporting matrices as text files or CSV files
+
 ## Building JMat
 
 To build the JMat library, first clone the Git main branch (which holds the latest version of JMat) using the command:
