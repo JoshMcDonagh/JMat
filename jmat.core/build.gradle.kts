@@ -8,6 +8,7 @@
 
 plugins {
 	kotlin("jvm") version "1.4.30"
+    id("maven-publish")
 }
 
 repositories {
@@ -34,6 +35,24 @@ tasks.test {
     testLogging {
 		events("passed", "skipped", "failed")
 	}
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "JMatPackages"
+            url = uri("https://maven.pkg.github.com/joshmcdonagh/jmat")
+            credentials {
+                username = System.getenv("USERNAME")
+                password = System.getenv("TOKEN")
+            }
+        }
+    }
+    publications {
+        register<MavenPublication>("gpr") {
+            from(components["java"])
+        }
+    }
 }
 
 version = "1.0.0"
