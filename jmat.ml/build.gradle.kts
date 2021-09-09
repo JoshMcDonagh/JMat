@@ -7,7 +7,7 @@
  */
 
 plugins {
-	kotlin("jvm") version "1.4.30"
+    kotlin("jvm") version "1.4.30"
     id("maven-publish")
 }
 
@@ -16,7 +16,7 @@ repositories {
 }
 
 dependencies {
-    api(projects(":jmat.core"))
+    implementation(project(":jmat.core"))
 
     testImplementation("junit:junit:4.12")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.4.2")
