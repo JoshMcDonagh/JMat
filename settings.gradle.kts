@@ -9,3 +9,4 @@
 
 rootProject.name = "JMat"
 include("jmat.core")
+include("jmat.ml")

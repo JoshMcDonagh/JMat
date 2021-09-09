@@ -16,6 +16,8 @@ repositories {
 }
 
 dependencies {
+    api(projects(":jmat.core"))
+
     testImplementation("junit:junit:4.12")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.4.2")
     testRuntime("org.junit.jupiter:junit-jupiter-engine:5.4.2")
@@ -37,22 +39,4 @@ tasks.test {
 	}
 }
 
-publishing {
-    repositories {
-        maven {
-            name = "JMatPackages"
-            url = uri("https://maven.pkg.github.com/joshmcdonagh/jmat")
-            credentials {
-                username = System.getenv("USERNAME")
-                password = System.getenv("TOKEN")
-            }
-        }
-    }
-    publications {
-        register<MavenPublication>("gpr") {
-            from(components["java"])
-        }
-    }
-}
-
-version = "2.0.0"
+version = "1.0.0"
