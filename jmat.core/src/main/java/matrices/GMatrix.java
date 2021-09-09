@@ -518,6 +518,7 @@ public class GMatrix<T> implements Matrix, Iterable<T>
 		}
 		
 		// Displays each row of the matrix on the console
+		String printMatrix = "";
 		for (int i = 0; i < height(); i++)
 		{
 			String printLn = "";
@@ -526,8 +527,9 @@ public class GMatrix<T> implements Matrix, Iterable<T>
 				String strVal = stringMatrixData.get(i).get(j);
 				printLn += strVal + new String(new char[colLengths.get(j) - strVal.length()]).replace("\0", " ") + delimiter;
 			}
-			System.out.println(printLn);
+			printMatrix += printLn + "\n";
 		}
+		System.out.print(printMatrix);
 	}
 	
 	/**
