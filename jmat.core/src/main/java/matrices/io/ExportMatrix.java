@@ -3,10 +3,21 @@ package main.java.matrices.io;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.Scanner;
 
-import main.java.matrices.CMatrix;
-import main.java.matrices.ConvertMatrix;
-import main.java.matrices.DMatrix;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.TransformerFactoryConfigurationError;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import main.java.matrices.GMatrix;
 
 /**
@@ -28,46 +39,21 @@ public interface ExportMatrix
 	public static <T> void asFile(String fileName, String delimiter, GMatrix<T> matrix) throws FileNotFoundException
 	{
 		PrintWriter writer = new PrintWriter(new File(fileName));
-		StringBuilder txtContent = new StringBuilder();
+		StringBuilder fileContent = new StringBuilder();
 		
 		for (int i = 0; i < matrix.height(); i++)
 		{
 			for (int j = 0; j < matrix.width(); j++)
 			{
-				txtContent.append(matrix.get(i, j));
+				fileContent.append(matrix.get(i, j));
 				if (j < matrix.width() - 1)
-					txtContent.append(delimiter);
+					fileContent.append(delimiter);
 			}
-			txtContent.append("\n");
+			fileContent.append("\n");
 		}
 		
-		writer.write(txtContent.toString());
+		writer.write(fileContent.toString());
 		writer.close();
-	}
-	
-	/**
-	 * Exports a given comparable matrix as a file.
-	 * @param <T> The value type of which is contained by the matrix
-	 * @param fileName The filename of the file to export the matrix to
-	 * @param delimiter The string which separates each row element in the exported file
-	 * @param matrix The comparable matrix to export
-	 * @throws FileNotFoundException Exception thrown if the file exporting the matrix to is not found
-	 */
-	public static <T extends Comparable<T>> void asFile(String fileName, String delimiter, CMatrix<T> matrix) throws FileNotFoundException
-	{
-		asFile(fileName, delimiter, ConvertMatrix.toGeneric(matrix));
-	}
-	
-	/**
-	 * Exports a given double matrix as a file.
-	 * @param fileName The filename of the file to export the matrix to
-	 * @param delimiter The string which separates each row element in the exported file
-	 * @param matrix The double matrix to export
-	 * @throws FileNotFoundException Exception thrown if the file exporting the matrix to is not found
-	 */
-	public static void asFile(String fileName, String delimiter, DMatrix matrix) throws FileNotFoundException
-	{
-		asFile(fileName, delimiter, ConvertMatrix.toGeneric(matrix));
 	}
 	
 	/**
@@ -83,25 +69,70 @@ public interface ExportMatrix
 	}
 	
 	/**
-	 * Exports a given comparable matrix as a CSV file.
-	 * @param <T> The value type of which is contained by the matrix
-	 * @param fileName The filename of the file to export the matrix to
-	 * @param matrix The comparable matrix to export
-	 * @throws FileNotFoundException Exception thrown if the file exporting the matrix to is not found
+	 * Checks if a given file is accessible, if not, a FileNotFoundException is thrown.
+	 * @param fileName The filename of the file to check
+	 * @throws FileNotFoundException Exception thrown if the file is inaccessible
 	 */
-	public static <T extends Comparable<T>> void asCsv(String fileName, CMatrix<T> matrix) throws FileNotFoundException
+	private static void checkIfFileIsAccessible(String fileName) throws FileNotFoundException
 	{
-		asCsv(fileName, ConvertMatrix.toGeneric(matrix));
+		new Scanner(new File(fileName)).close();
 	}
 	
 	/**
-	 * Exports a given double matrix as a CSV file.
+	 * Exports a given generic matrix as an XML file.
+	 * @param <T> The value type of which is contained by the matrix
 	 * @param fileName The filename of the file to export the matrix to
-	 * @param matrix The double matrix to export
+	 * @param matrix The generic matrix to export
 	 * @throws FileNotFoundException Exception thrown if the file exporting the matrix to is not found
 	 */
-	public static void asCsv(String fileName, DMatrix matrix) throws FileNotFoundException
+	public static <T> void asXml(String fileName, GMatrix<T> matrix) throws FileNotFoundException
 	{
-		asCsv(fileName, ConvertMatrix.toGeneric(matrix));
+		checkIfFileIsAccessible(fileName);
+		
+		try 
+		{
+			Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+			Element rootElement = document.createElement("MATRIX");
+			document.appendChild(rootElement);
+			
+			for (int i = 0; i < matrix.height(); i++)
+			{
+				Element rowElement = document.createElement("ROW");
+				for (int j = 0; j < matrix.width(); j++)
+				{
+					Element colElement = document.createElement("COL");
+					StringBuilder xmlContent = new StringBuilder();
+					xmlContent.append(matrix.get(i, j));
+					colElement.appendChild(document.createTextNode(xmlContent.toString()));
+					rowElement.appendChild(colElement);
+				}
+				rootElement.appendChild(rowElement);
+			}
+			
+			Transformer transformer = TransformerFactory.newInstance().newTransformer();
+			DOMSource source = new DOMSource(document);
+			StreamResult result = new StreamResult(new File(fileName));
+			transformer.transform(source, result);
+		} 
+		
+		catch (ParserConfigurationException e) 
+		{
+			e.printStackTrace();
+		} 
+		
+		catch (TransformerConfigurationException e) 
+		{
+			e.printStackTrace();
+		} 
+		
+		catch (TransformerFactoryConfigurationError e) 
+		{
+			e.printStackTrace();
+		} 
+		
+		catch (TransformerException e) 
+		{
+			e.printStackTrace();
+		}
 	}
 }
