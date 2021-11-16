@@ -34,7 +34,7 @@ class ExportMatrixTest
 	}
 	
 	@Test
-	void GMatrixAsTxt() 
+	void GMatrixAsFile() 
 	{
 		Integer[][] integers = {
 				{4, 7, 3, 5},
@@ -42,14 +42,14 @@ class ExportMatrixTest
 				{1, 3, 6, 4}
 		};
 		
-		String fileName = "GMatrixAsTxtTest.txt";
+		String fileName = "GMatrixAsFileTest.txt";
 		String delimiter = ";";
 		
 		GMatrix<Integer> matrix = new GMatrix<Integer>(integers);
 		
 		try 
 		{
-			ExportMatrix.asTxt(fileName, delimiter, matrix);
+			ExportMatrix.asFile(fileName, delimiter, matrix);
 			CMatrix<String> importedMatrix = importMatrix(fileName, delimiter);
 			new File(fileName).delete();
 			
@@ -69,7 +69,7 @@ class ExportMatrixTest
 	}
 	
 	@Test
-	void CMatrixAsTxt()
+	void CMatrixAsFile()
 	{
 		Integer[][] integers = {
 				{4, 7, 3, 5},
@@ -77,14 +77,14 @@ class ExportMatrixTest
 				{1, 3, 6, 4}
 		};
 		
-		String fileName = "CMatrixAsTxtTest.txt";
+		String fileName = "CMatrixAsFileTest.txt";
 		String delimiter = ";";
 		
 		CMatrix<Integer> matrix = new CMatrix<Integer>(integers);
 		
 		try 
 		{
-			ExportMatrix.asTxt(fileName, delimiter, matrix);
+			ExportMatrix.asFile(fileName, delimiter, matrix);
 			CMatrix<String> importedMatrix = importMatrix(fileName, delimiter);
 			new File(fileName).delete();
 			
@@ -104,7 +104,7 @@ class ExportMatrixTest
 	}
 	
 	@Test
-	void DMatrixAsTxt()
+	void DMatrixAsFile()
 	{
 		Double[][] doubles = {
 				{4.0, 7.0, 3.0, 5.0},
@@ -112,14 +112,14 @@ class ExportMatrixTest
 				{1.0, 3.0, 6.0, 4.0}
 		};
 		
-		String fileName = "DMatrixAsTxtTest.txt";
+		String fileName = "DMatrixAsFileTest.txt";
 		String delimiter = ";";
 		
 		DMatrix matrix = new DMatrix(doubles);
 		
 		try 
 		{
-			ExportMatrix.asTxt(fileName, delimiter, matrix);
+			ExportMatrix.asFile(fileName, delimiter, matrix);
 			CMatrix<String> importedMatrix = importMatrix(fileName, delimiter);
 			new File(fileName).delete();
 			

@@ -42,7 +42,7 @@ class ImportMatrixTest
 	}
 	
 	@Test
-	void fromTxtAsString() 
+	void fromFileAsString() 
 	{
 		Integer[][] integers = {
 				{4, 7, 3, 5},
@@ -50,7 +50,7 @@ class ImportMatrixTest
 				{1, 3, 6, 4}
 		};
 		
-		String fileName = "FromTxtAsStringTest.txt";
+		String fileName = "FromFileAsStringTest.txt";
 		String delimiter = ";";
 		
 		GMatrix<Integer> matrix = new GMatrix<Integer>(integers);
@@ -58,7 +58,7 @@ class ImportMatrixTest
 		try 
 		{
 			exportMatrix(fileName, delimiter, matrix);
-			CMatrix<String> importedMatrix = ImportMatrix.fromTxtAsString(fileName, delimiter);
+			CMatrix<String> importedMatrix = ImportMatrix.fromFileAsString(fileName, delimiter);
 			new File(fileName).delete();
 			
 			assertEquals(matrix.height(), importedMatrix.height());
@@ -77,7 +77,7 @@ class ImportMatrixTest
 	}
 	
 	@Test
-	void fromTxtAsDouble()
+	void fromFileAsDouble()
 	{
 		Double[][] doubles = {
 				{4.0, 7.0, 3.0, 5.0},
@@ -85,7 +85,7 @@ class ImportMatrixTest
 				{1.0, 3.0, 6.0, 4.0}
 		};
 		
-		String fileName = "FromTxtAsDoubleTest.txt";
+		String fileName = "FromFileAsDoubleTest.txt";
 		String delimiter = ";";
 		
 		DMatrix matrix = new DMatrix(doubles);
@@ -93,7 +93,7 @@ class ImportMatrixTest
 		try 
 		{
 			exportMatrix(fileName, delimiter, matrix);
-			DMatrix importedMatrix = ImportMatrix.fromTxtAsDouble(fileName, delimiter);
+			DMatrix importedMatrix = ImportMatrix.fromFileAsDouble(fileName, delimiter);
 			new File(fileName).delete();
 			
 			assertEquals(matrix.height(), importedMatrix.height());

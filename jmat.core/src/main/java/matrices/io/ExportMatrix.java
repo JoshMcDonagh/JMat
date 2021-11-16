@@ -18,14 +18,14 @@ import main.java.matrices.GMatrix;
 public interface ExportMatrix 
 {
 	/**
-	 * Exports a given generic matrix as a text file.
+	 * Exports a given generic matrix as a file.
 	 * @param <T> The value type of which is contained by the matrix
 	 * @param fileName The filename of the file to export the matrix to
-	 * @param delimiter The string which separates each row element in the exported text file
+	 * @param delimiter The string which separates each row element in the exported file
 	 * @param matrix The generic matrix to export
 	 * @throws FileNotFoundException Exception thrown if the file exporting the matrix to is not found
 	 */
-	public static <T> void asTxt(String fileName, String delimiter, GMatrix<T> matrix) throws FileNotFoundException
+	public static <T> void asFile(String fileName, String delimiter, GMatrix<T> matrix) throws FileNotFoundException
 	{
 		PrintWriter writer = new PrintWriter(new File(fileName));
 		StringBuilder txtContent = new StringBuilder();
@@ -46,28 +46,28 @@ public interface ExportMatrix
 	}
 	
 	/**
-	 * Exports a given comparable matrix as a text file.
+	 * Exports a given comparable matrix as a file.
 	 * @param <T> The value type of which is contained by the matrix
 	 * @param fileName The filename of the file to export the matrix to
-	 * @param delimiter The string which separates each row element in the exported text file
+	 * @param delimiter The string which separates each row element in the exported file
 	 * @param matrix The comparable matrix to export
 	 * @throws FileNotFoundException Exception thrown if the file exporting the matrix to is not found
 	 */
-	public static <T extends Comparable<T>> void asTxt(String fileName, String delimiter, CMatrix<T> matrix) throws FileNotFoundException
+	public static <T extends Comparable<T>> void asFile(String fileName, String delimiter, CMatrix<T> matrix) throws FileNotFoundException
 	{
-		asTxt(fileName, delimiter, ConvertMatrix.toGeneric(matrix));
+		asFile(fileName, delimiter, ConvertMatrix.toGeneric(matrix));
 	}
 	
 	/**
-	 * Exports a given double matrix as a text file.
+	 * Exports a given double matrix as a file.
 	 * @param fileName The filename of the file to export the matrix to
-	 * @param delimiter The string which separates each row element in the exported text file
+	 * @param delimiter The string which separates each row element in the exported file
 	 * @param matrix The double matrix to export
 	 * @throws FileNotFoundException Exception thrown if the file exporting the matrix to is not found
 	 */
-	public static void asTxt(String fileName, String delimiter, DMatrix matrix) throws FileNotFoundException
+	public static void asFile(String fileName, String delimiter, DMatrix matrix) throws FileNotFoundException
 	{
-		asTxt(fileName, delimiter, ConvertMatrix.toGeneric(matrix));
+		asFile(fileName, delimiter, ConvertMatrix.toGeneric(matrix));
 	}
 	
 	/**
@@ -79,7 +79,7 @@ public interface ExportMatrix
 	 */
 	public static <T> void asCsv(String fileName, GMatrix<T> matrix) throws FileNotFoundException
 	{
-		asTxt(fileName, ",", matrix);
+		asFile(fileName, ",", matrix);
 	}
 	
 	/**

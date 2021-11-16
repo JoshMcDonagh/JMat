@@ -17,13 +17,13 @@ import main.java.matrices.DMatrix;
 public interface ImportMatrix 
 {
 	/**
-	 * Imports data from a text file and generates a string matrix from it.
+	 * Imports data from a file and generates a string matrix from it.
 	 * @param fileName The filename of the file to import the matrix from
-	 * @param delimiter The string which separates each row element in the imported text file
+	 * @param delimiter The string which separates each row element in the imported file
 	 * @return The imported string matrix
 	 * @throws FileNotFoundException Exception thrown if the file importing the matrix from is not found
 	 */
-	public static CMatrix<String> fromTxtAsString(String fileName, String delimiter) throws FileNotFoundException
+	public static CMatrix<String> fromFileAsString(String fileName, String delimiter) throws FileNotFoundException
 	{
 		CMatrix<String> importedMatrix = new CMatrix<String>();
 		Scanner reader = new Scanner(new File(fileName));
@@ -37,15 +37,15 @@ public interface ImportMatrix
 	}
 	
 	/**
-	 * Imports data from a text file and generates a double matrix from it.
+	 * Imports data from a file and generates a double matrix from it.
 	 * @param fileName The filename of the file to import the matrix from
-	 * @param delimiter The string which separates each row element in the imported text file
+	 * @param delimiter The string which separates each row element in the imported file
 	 * @return The imported double matrix
 	 * @throws FileNotFoundException Exception thrown if the file importing the matrix from is not found
 	 */
-	public static DMatrix fromTxtAsDouble(String fileName, String delimiter) throws FileNotFoundException
+	public static DMatrix fromFileAsDouble(String fileName, String delimiter) throws FileNotFoundException
 	{
-		return ConvertMatrix.stringToDouble(fromTxtAsString(fileName, delimiter));
+		return ConvertMatrix.stringToDouble(fromFileAsString(fileName, delimiter));
 	}
 	
 	/**
@@ -56,7 +56,7 @@ public interface ImportMatrix
 	 */
 	public static CMatrix<String> fromCsvAsString(String fileName) throws FileNotFoundException
 	{
-		return fromTxtAsString(fileName, ",");
+		return fromFileAsString(fileName, ",");
 	}
 	
 	/**
