@@ -75,7 +75,7 @@ public interface ExportMatrix
 	 */
 	private static void checkIfFileIsAccessible(String fileName) throws FileNotFoundException
 	{
-		new Scanner(new File(fileName)).close();
+		new PrintWriter(new File(fileName)).close();
 	}
 	
 	/**
@@ -115,24 +115,9 @@ public interface ExportMatrix
 			transformer.transform(source, result);
 		} 
 		
-		catch (ParserConfigurationException e) 
+		catch (ParserConfigurationException | TransformerFactoryConfigurationError | TransformerException e) 
 		{
 			e.printStackTrace();
 		} 
-		
-		catch (TransformerConfigurationException e) 
-		{
-			e.printStackTrace();
-		} 
-		
-		catch (TransformerFactoryConfigurationError e) 
-		{
-			e.printStackTrace();
-		} 
-		
-		catch (TransformerException e) 
-		{
-			e.printStackTrace();
-		}
 	}
 }

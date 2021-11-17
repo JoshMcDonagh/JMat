@@ -2,7 +2,16 @@ package main.java.matrices.io;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
+
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import main.java.matrices.CMatrix;
 import main.java.matrices.ConvertMatrix;
@@ -68,5 +77,69 @@ public interface ImportMatrix
 	public static DMatrix fromCsvAsDouble(String fileName) throws FileNotFoundException
 	{
 		return ConvertMatrix.stringToDouble(fromCsvAsString(fileName));
+	}
+	
+	/**
+	 * Checks if a given file is accessible, if not, a FileNotFoundException is thrown.
+	 * @param fileName The filename of the file to check
+	 * @throws FileNotFoundException Exception thrown if the file is inaccessible
+	 */
+	private static void checkIfFileIsAccessible(String fileName) throws FileNotFoundException
+	{
+		new Scanner(new File(fileName)).close();
+	}
+	
+	/**
+	 * Imports data from an XML file and generates a string matrix from it.
+	 * @param fileName The filename of the file to import the matrix from
+	 * @return The imported string matrix
+	 * @throws FileNotFoundException Exception thrown if the file importing the matrix from is not found
+	 */
+	public static CMatrix<String> fromXmlAsString(String fileName) throws FileNotFoundException
+	{
+		checkIfFileIsAccessible(fileName);
+		
+		CMatrix<String> importedMatrix = new CMatrix<String>();
+		
+		try 
+		{
+			Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new File(fileName));
+			NodeList rowList = document.getElementsByTagName("ROW");
+			
+			for (int i = 0; i < rowList.getLength(); i++)
+			{
+				Node rowNode = rowList.item(i);
+				
+				if (rowNode.getNodeType() != Node.ELEMENT_NODE)
+					continue;
+				
+				NodeList colList = rowNode.getChildNodes();
+				String[] values = new String[colList.getLength()];
+				
+				for (int j = 0; j < colList.getLength(); j++)
+				{
+					values[j] = colList.item(j).getAttributes().toString();
+				}
+				
+				importedMatrix.addRow(values);
+			}
+		} 
+		catch (SAXException | IOException | ParserConfigurationException e) 
+		{
+			e.printStackTrace();
+		}
+			
+		return importedMatrix;
+	}
+	
+	/**
+	 * Imports data from a XML file and generates a double matrix from it.
+	 * @param fileName The filename of the file to import the matrix from
+	 * @return The imported double matrix
+	 * @throws FileNotFoundException Exception thrown if the file importing the matrix from is not found
+	 */
+	public static DMatrix fromXmlAsDouble(String fileName) throws FileNotFoundException
+	{
+		return ConvertMatrix.stringToDouble(fromXmlAsString(fileName));
 	}
 }
