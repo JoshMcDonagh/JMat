@@ -3,12 +3,10 @@ package main.java.matrices.io;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.Scanner;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.TransformerFactoryConfigurationError;
@@ -118,6 +116,6 @@ public interface ExportMatrix
 		catch (ParserConfigurationException | TransformerFactoryConfigurationError | TransformerException e) 
 		{
 			e.printStackTrace();
-		} 
+		}
 	}
 }

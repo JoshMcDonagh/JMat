@@ -117,9 +117,7 @@ public interface ImportMatrix
 				String[] values = new String[colList.getLength()];
 				
 				for (int j = 0; j < colList.getLength(); j++)
-				{
-					values[j] = colList.item(j).getAttributes().toString();
-				}
+					values[j] = colList.item(j).getFirstChild().getNodeValue();
 				
 				importedMatrix.addRow(values);
 			}
