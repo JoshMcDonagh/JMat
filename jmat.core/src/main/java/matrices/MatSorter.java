@@ -17,7 +17,7 @@ interface MatSorter
 	 * @param ascending Boolean value which is {@code true} if the matrix is to be sorted in an ascending way, otherwise {@code false}
 	 * @return The sorted double matrix
 	 */
-	public static DMatrix assistedInsertionSort(int index, DMatrix matrix, boolean ascending)
+	static DMatrix assistedInsertionSort(int index, DMatrix matrix, boolean ascending)
 	{
 		int numOfBuckets = matrix.height();
 		ArrayList<DMatrix> buckets = new ArrayList<DMatrix>(numOfBuckets);
@@ -105,7 +105,7 @@ interface MatSorter
 	 * @param ascending Boolean value which is {@code true} if the matrix is to be sorted in an ascending way, otherwise {@code false}
 	 * @return The sorted comparable matrix
 	 */
-	public static <T extends Comparable<T>> CMatrix<T> mergeSort(int index, CMatrix<T> matrix, boolean ascending)
+	static <T extends Comparable<T>> CMatrix<T> mergeSort(int index, CMatrix<T> matrix, boolean ascending)
 	{
 		if (matrix.height() <= 1)
 			return matrix;

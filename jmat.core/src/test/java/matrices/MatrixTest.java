@@ -141,6 +141,58 @@ class MatrixTest
 	}
 	
 	@Test
+	void sortAscendingCMatrixMergeSort()
+	{
+		int column = 5;
+		int height = 20;
+		int width = 10;
+		
+		DMatrix dMatrix = new DMatrix(height, width);
+		dMatrix.intRandomise(1, 100);
+		CMatrix<Double> cMatrix = ConvertMatrix.toComparable(dMatrix);
+		CMatrix<Double> sorted = Matrix.mergeSort(column, cMatrix);
+		
+		boolean isSorted = true;
+		
+		for (int i = 1; i < sorted.height(); i++)
+		{
+			if (sorted.get(i, column) < sorted.get(i - 1, column))
+			{
+				isSorted = false;
+				break;
+			}
+		}
+		
+		assertTrue(isSorted);
+	}
+	
+	@Test
+	void sortDescendingCMatrixMergeSort()
+	{
+		int column = 5;
+		int height = 20;
+		int width = 10;
+		
+		DMatrix dMatrix = new DMatrix(height, width);
+		dMatrix.intRandomise(1, 100);
+		CMatrix<Double> cMatrix = ConvertMatrix.toComparable(dMatrix);
+		CMatrix<Double> sorted = Matrix.mergeSort(column, cMatrix, false);
+		
+		boolean isSorted = true;
+		
+		for (int i = 1; i < sorted.height(); i++)
+		{
+			if (sorted.get(i, column) > sorted.get(i - 1, column))
+			{
+				isSorted = false;
+				break;
+			}
+		}
+		
+		assertTrue(isSorted);
+	}
+	
+	@Test
 	void mergeVerticallyGMatrix()
 	{
 		Integer[][] integers1 = {

@@ -74,6 +74,31 @@ public interface Matrix
 	}
 	
 	/**
+	 * Sorts the contents of a comparable matrix using merge sort.
+	 * @param <T> Type of data that the given matrix contains
+	 * @param index Column index to base the sort process on
+	 * @param matrix Comparable matrix to sort
+	 * @param ascending Boolean value which is {@code true} if the matrix is to be sorted in an ascending way, otherwise {@code false}
+	 * @return The sorted comparable matrix
+	 */
+	public static <T extends Comparable<T>> CMatrix<T> mergeSort(int index, CMatrix<T> matrix, boolean ascending)
+	{
+		return MatSorter.mergeSort(index, matrix, ascending);
+	}
+	
+	/**
+	 * Sorts the contents of a comparable matrix using merge sort.
+	 * @param <T> Type of data that the given matrix contains
+	 * @param index Column index to base the sort process on
+	 * @param matrix Comparable matrix to sort
+	 * @return The sorted comparable matrix
+	 */
+	public static <T extends Comparable<T>> CMatrix<T> mergeSort(int index, CMatrix<T> matrix)
+	{
+		return mergeSort(index, matrix, true);
+	}
+	
+	/**
 	 * Appends the rows of a generic matrix onto the end of another generic matrix.
 	 * @param <T> Type of data that the given matrices contain
 	 * @param matrix1 Generic matrix to be appended to
