@@ -1,6 +1,7 @@
 package test.java.matrices.util;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -536,5 +537,27 @@ class MatMathsTest
 		DMatrix matrix3 = MatMaths.mul(MatMaths.inverseOf(matrix1), matrix2);
 		
 		assertTrue(MatMaths.lDiv(matrix1, matrix2).equalTo(matrix3));
+	}
+	
+	@Test
+	void transpose()
+	{
+		Double[][] doubles = {
+				{4.0, 7.0, 3.0, 5.0, 5.0},
+				{2.0, 1.0, 4.0, 4.0, 2.0},
+				{1.0, 3.0, 6.0, 4.0, 9.0}
+		};
+		
+		DMatrix matrix = new DMatrix(doubles);
+		DMatrix matrixTranspose = MatMaths.transpose(matrix);
+		
+		assertEquals(doubles.length, matrixTranspose.width());
+		assertEquals(doubles[0].length, matrixTranspose.height());
+		
+		for (int i = 0; i < doubles.length; i++)
+		{
+			for (int j = 0; j < doubles[i].length; j++)
+			assertEquals(doubles[i][j], matrixTranspose.get(j,  i));
+		}
 	}
 }

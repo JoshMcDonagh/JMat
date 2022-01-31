@@ -450,4 +450,16 @@ public interface MatMaths
 		
 		return mul(inverseOf(matrix1), matrix2);
 	}
+	
+	// !!! Matrix transpose !!!
+	
+	/**
+	 * Method returns a transpose of given the double matrix.
+	 * @param matrix The double matrix to find the transpose of
+	 * @return The transpose of the given double matrix
+	 */
+	public static DMatrix transpose(DMatrix matrix)
+	{
+		return matrix.transpose();
+	}
 }
