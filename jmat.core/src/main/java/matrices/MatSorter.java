@@ -1,7 +1,5 @@
 package main.java.matrices;
 
-import java.util.ArrayList;
-
 /**
  * Interface which is used to access static methods that provide matrix sorting functionality.
  * 
@@ -11,20 +9,41 @@ import java.util.ArrayList;
 interface MatSorter 
 {
 	/**
-	 * Sorts a double matrix using an assisted version of the insertion sort.
+	 * Checks whether a given double matrix is sorted or not based on a column index.
+	 * @param index Column index to check
+	 * @param matrix Double matrix to check
+	 * @param ascending Boolean value which is {@code true} if the matrix should be sorted in an ascending way, otherwise {@code false}
+	 * @return Boolean value as to whether the given double matrix is sorted ({@code true}) or unsorted ({@code false})
+	 */
+	private static boolean isSorted(int index, DMatrix matrix, boolean ascending)
+	{
+		for (int i = 1; i < matrix.height(); i++)
+		{
+			if (ascending && matrix.get(i, index) < matrix.get(i-1, index))
+				return false;
+			else if (!ascending && matrix.get(i, index) > matrix.get(i-1, index))
+				return false;
+		}
+		return true;
+	}
+	
+	/**
+	 * Sorts a double matrix using a non-comparison sort derived from the bucket sort and pigeonhole sort.
 	 * @param index Column index to base the sort process on
 	 * @param matrix Double matrix to sort
 	 * @param ascending Boolean value which is {@code true} if the matrix is to be sorted in an ascending way, otherwise {@code false}
 	 * @return The sorted double matrix
 	 */
-	static DMatrix assistedInsertionSort(int index, DMatrix matrix, boolean ascending)
+	static DMatrix recursiveBucketSort(int index, DMatrix matrix, boolean ascending)
 	{
-		int numOfBuckets = matrix.height();
-		ArrayList<DMatrix> buckets = new ArrayList<DMatrix>(numOfBuckets);
+		if (matrix.height() < 2)
+			return matrix.clone();
 		
-		// Generates the buckets
+		int numOfBuckets = matrix.height();
+		DMatrix[] buckets = new DMatrix[numOfBuckets];
+		
 		for (int i = 0; i < numOfBuckets; i++)
-			buckets.add(new DMatrix());
+			buckets[i] = new DMatrix();
 		
 		double maximum = 0;
 		double minimum = 0;
@@ -52,20 +71,31 @@ interface MatSorter
 			DMatrix row = matrix.getRows(i);
 			double value = row.get(0, index);
 			int bucketIndex;
-			if (ascending)
-				bucketIndex = (int)((numOfBuckets - 1) * ((value - minimum) / difference));
+			
+			if (difference == 0)
+				bucketIndex = 0;
+			else if (ascending)
+				bucketIndex = (int)((numOfBuckets - 1.0) * ((value - minimum) / difference));
 			else
-				bucketIndex = (int)((numOfBuckets - 1) * (1 - (value - minimum) / difference));
-			buckets.set(bucketIndex, Matrix.mergeVertically(buckets.get(bucketIndex), row));
+				bucketIndex = (int)((numOfBuckets - 1.0) * (1.0 - ((value - minimum) / difference)));
+			
+			buckets[bucketIndex] = Matrix.mergeVertically(buckets[bucketIndex], row);
 		}
 		
-		DMatrix flattenedMatrix = new DMatrix();
+		// If any bucket contains more than one element and is unsorted,
+		// run the bucket sort on the bucket
+		for (int i = 0; i < numOfBuckets; i++)
+		{
+			if (buckets[i].height() > 1 && !isSorted(index, buckets[i], ascending))
+				buckets[i] = recursiveBucketSort(index, buckets[i], ascending);
+		}
 		
 		// Flattens the list of buckets into a matrix
+		DMatrix flattenedMatrix = new DMatrix();
 		for (int i = 0; i < numOfBuckets; i++)
-			flattenedMatrix = (DMatrix) Matrix.mergeVertically(flattenedMatrix, buckets.get(i));
+			flattenedMatrix = (DMatrix) Matrix.mergeVertically(flattenedMatrix, buckets[i]);
 		
-		return ConvertMatrix.toDouble(insertionSort(index, flattenedMatrix, ascending));
+		return flattenedMatrix;
 	}
 	
 	/**
@@ -76,7 +106,7 @@ interface MatSorter
 	 * @param ascending Boolean value which is {@code true} if the matrix is to be sorted in an ascending way, otherwise {@code false}
 	 * @return The sorted comparable matrix
 	 */
-	private static <T extends Comparable<T>> CMatrix<T> insertionSort(int index, CMatrix<T> matrix, boolean ascending)
+	static <T extends Comparable<T>> CMatrix<T> insertionSort(int index, CMatrix<T> matrix, boolean ascending)
 	{
 		for (int i = 0; i < matrix.height(); i++)
 		{

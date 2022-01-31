@@ -59,7 +59,7 @@ public interface Matrix
 	 */
 	public static DMatrix sort(int index, DMatrix matrix, boolean ascending)
 	{
-		return MatSorter.assistedInsertionSort(index, matrix, ascending);
+		return MatSorter.recursiveBucketSort(index, matrix, ascending);
 	}
 	
 	/**
