@@ -1,5 +1,7 @@
 package main.java.matrices;
 
+import java.util.HashMap;
+
 /**
  * Interface which is used to access static methods that provide matrix sorting functionality.
  * 
@@ -36,10 +38,12 @@ interface MatSorter
 	 */
 	static DMatrix recursiveBucketSort(int index, DMatrix matrix, boolean ascending)
 	{
-		if (matrix.height() < 2)
-			return matrix.clone();
+		DMatrix newMatrix = matrix.clone();
 		
-		int numOfBuckets = matrix.height();
+		if (newMatrix.height() < 2)
+			return newMatrix;
+		
+		int numOfBuckets = newMatrix.height();
 		DMatrix[] buckets = new DMatrix[numOfBuckets];
 		
 		for (int i = 0; i < numOfBuckets; i++)
@@ -50,9 +54,9 @@ interface MatSorter
 		boolean isNotInitialised = true;
 		
 		// Finds the minimum and maximum values
-		for (int i = 0; i < matrix.height(); i++)
+		for (int i = 0; i < newMatrix.height(); i++)
 		{
-			double value = matrix.get(i, index);
+			double value = newMatrix.get(i, index);
 			
 			if (isNotInitialised || value > maximum)
 				maximum = value;
@@ -66,9 +70,9 @@ interface MatSorter
 		double difference = maximum - minimum;
 		
 		// Adds rows to the buckets
-		for (int i = 0; i < matrix.height(); i++)
+		for (int i = 0; i < newMatrix.height(); i++)
 		{
-			DMatrix row = matrix.getRows(i);
+			DMatrix row = newMatrix.getRows(i);
 			double value = row.get(0, index);
 			int bucketIndex;
 			
@@ -108,23 +112,25 @@ interface MatSorter
 	 */
 	static <T extends Comparable<T>> CMatrix<T> insertionSort(int index, CMatrix<T> matrix, boolean ascending)
 	{
-		for (int i = 0; i < matrix.height(); i++)
+		CMatrix<T> newMatrix = matrix.clone();
+		
+		for (int i = 0; i < newMatrix.height(); i++)
 		{
-			CMatrix<T> key = matrix.getRows(i);
+			CMatrix<T> key = newMatrix.getRows(i);
 			int j;
 			if (ascending)
 			{
-				for (j = i - 1; j >= 0 && matrix.get(j,  index).compareTo(key.get(0, index)) > 0; j--)
-					matrix.replaceRows(j + 1, matrix.getRows(j));
+				for (j = i - 1; j >= 0 && newMatrix.get(j,  index).compareTo(key.get(0, index)) > 0; j--)
+					newMatrix.replaceRows(j + 1, newMatrix.getRows(j));
 			}
 			else
 			{
-				for (j = i - 1; j >= 0 && matrix.get(j,  index).compareTo(key.get(0, index)) < 0; j--)
-					matrix.replaceRows(j + 1, matrix.getRows(j));
+				for (j = i - 1; j >= 0 && newMatrix.get(j,  index).compareTo(key.get(0, index)) < 0; j--)
+					newMatrix.replaceRows(j + 1, newMatrix.getRows(j));
 			}
-			matrix.replaceRows(j + 1, key);
+			newMatrix.replaceRows(j + 1, key);
 		}
-		return matrix;
+		return newMatrix;
 	}
 	
 	/**
@@ -137,12 +143,14 @@ interface MatSorter
 	 */
 	static <T extends Comparable<T>> CMatrix<T> mergeSort(int index, CMatrix<T> matrix, boolean ascending)
 	{
-		if (matrix.height() <= 1)
-			return matrix;
+		CMatrix<T> newMatrix = matrix.clone();
 		
-		int split = matrix.height() / 2;
-		CMatrix<T> subMatrix1 = mergeSort(index,  matrix.getRows(0, split), ascending);
-		CMatrix<T> subMatrix2 = mergeSort(index,  matrix.getRows(split, matrix.height()), ascending);
+		if (newMatrix.height() <= 1)
+			return newMatrix;
+		
+		int split = newMatrix.height() / 2;
+		CMatrix<T> subMatrix1 = mergeSort(index,  newMatrix.getRows(0, split), ascending);
+		CMatrix<T> subMatrix2 = mergeSort(index,  newMatrix.getRows(split, newMatrix.height()), ascending);
 		
 		return merge(index, subMatrix1, subMatrix2, ascending);
 	}
@@ -190,5 +198,107 @@ interface MatSorter
 		}
 		
 		return mergedMatrix;
+	}
+	
+	/**
+	 * Sorts a comparable matrix using the quick sort.
+	 * @param <T> Type of data that the given matrix contains
+	 * @param index Column index to base the sort process on
+	 * @param matrix Comparable matrix to sort
+	 * @param ascending Boolean value which is {@code true} if the matrix is to be sorted in an ascending way, otherwise {@code false}
+	 * @return The sorted comparable matrix
+	 */
+	static <T extends Comparable<T>> CMatrix<T> quickSort(int index, CMatrix<T> matrix, boolean ascending)
+	{
+		return innerQuickSort(index, matrix, ascending, 0, matrix.height() - 1);
+	}
+	
+	/**
+	 * Swaps two rows in the given comparable matrix.
+	 * @param <T> Type of data that the given matrix contains
+	 * @param matrix Comparable matrix to swap rows in
+	 * @param rowIndex1 The row index of one row to swap
+	 * @param rowIndex2 The row index of the other row to swap
+	 * @return The comparable matrix with swapped rows
+	 */
+	private static <T extends Comparable<T>> CMatrix<T> quickSwap(CMatrix<T> matrix, int rowIndex1, int rowIndex2)
+	{
+		CMatrix<T> swappedMatrix = matrix;
+		
+		CMatrix<T> row1 = swappedMatrix.getRows(rowIndex1);
+		CMatrix<T> row2 = swappedMatrix.getRows(rowIndex2);
+		
+		swappedMatrix.replaceRows(rowIndex1, row2);
+		swappedMatrix.replaceRows(rowIndex2, row1);
+		
+		return swappedMatrix;
+	}
+	
+	/**
+	 * Partitions a given comparable matrix using a pivot.
+	 * @param <T> Type of data that the given matrix contains
+	 * @param index Column index to base the sort process on
+	 * @param matrix Comparable matrix to partition
+	 * @param ascending Boolean value which is {@code true} if the matrix is to be sorted in an ascending way, otherwise {@code false}
+	 * @param low The lower bound row of the matrix to partition within
+	 * @param high The upper bound row of the matrix to partition within
+	 * @return A HashMap containing the partition comparable matrix as a key and the resulting partition index as a corresponding value
+	 */
+	private static <T extends Comparable<T>> HashMap<CMatrix<T>, Integer> quickPartition(int index, CMatrix<T> matrix, boolean ascending, int low, int high)
+	{
+		CMatrix<T> swappedMatrix = matrix;
+		CMatrix<T> pivotRow = swappedMatrix.getRows(high);
+		T pivotVal = pivotRow.get(0, index);
+		int i = (low - 1);
+		
+		for (int j = low; j <= high - 1; j++)
+		{
+			T value = swappedMatrix.get(j, index);
+			if (ascending && value.compareTo(pivotVal) < 0)
+			{
+				i++;
+				swappedMatrix = quickSwap(swappedMatrix, i, j);
+			}
+			else if (!ascending && value.compareTo(pivotVal) > 0)
+			{
+				i++;
+				swappedMatrix = quickSwap(swappedMatrix, i, j);
+			}
+		}
+		
+		swappedMatrix = quickSwap(swappedMatrix, i + 1, high);
+		HashMap<CMatrix<T>, Integer> partitionData = new HashMap<CMatrix<T>, Integer>();
+		partitionData.put(swappedMatrix, i + 1);
+		return partitionData;
+	}
+	
+	/**
+	 * Sorts a comparable matrix within a given range of rows using the quick sort.
+	 * @param <T> Type of data that the given matrix contains
+	 * @param index Column index to base the sort process on
+	 * @param matrix Comparable matrix to sort
+	 * @param ascending Boolean value which is {@code true} if the matrix is to be sorted in an ascending way, otherwise {@code false}
+	 * @param low The lower bound row of the matrix to sort within
+	 * @param high The upper bound row of the matrix to sort within
+	 * @return The sorted comparable matrix
+	 */
+	@SuppressWarnings("unchecked")
+	private static <T extends Comparable<T>> CMatrix<T> innerQuickSort(int index, CMatrix<T> matrix, boolean ascending, int low, int high)
+	{
+		CMatrix<T> newMatrix = matrix.clone();
+		
+		if (low < high)
+		{
+			HashMap<CMatrix<T>, Integer> partitionData = quickPartition(index, newMatrix, ascending, low, high);
+			newMatrix = (CMatrix<T>) partitionData.keySet().toArray()[0];
+			int partitionIndex = (int) partitionData.get(newMatrix);
+			
+			newMatrix = innerQuickSort(index, newMatrix, ascending, low, partitionIndex - 1);
+			newMatrix = innerQuickSort(index, newMatrix, ascending, partitionIndex + 1, high);
+			
+			return newMatrix;
+		}
+		
+		return matrix;
 	}
 }
