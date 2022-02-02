@@ -39,7 +39,7 @@ class MatrixTest
 	}
 	
 	@Test
-	void sortAscendingCMatrix()
+	void sortByColumnAscendingCMatrix()
 	{
 		int column = 5;
 		int height = 20;
@@ -48,7 +48,7 @@ class MatrixTest
 		DMatrix dMatrix = new DMatrix(height, width);
 		dMatrix.intRandomise(1, 100);
 		CMatrix<Double> cMatrix = ConvertMatrix.toComparable(dMatrix);
-		CMatrix<Double> sorted = Matrix.sort(column, cMatrix);
+		CMatrix<Double> sorted = Matrix.sortByColumn(column, cMatrix);
 		
 		boolean isSorted = true;
 		
@@ -65,7 +65,7 @@ class MatrixTest
 	}
 	
 	@Test
-	void sortDescendingCMatrix()
+	void sortByColumnDescendingCMatrix()
 	{
 		int column = 5;
 		int height = 20;
@@ -74,7 +74,7 @@ class MatrixTest
 		DMatrix dMatrix = new DMatrix(height, width);
 		dMatrix.intRandomise(1, 100);
 		CMatrix<Double> cMatrix = ConvertMatrix.toComparable(dMatrix);
-		CMatrix<Double> sorted = Matrix.sort(column, cMatrix, false);
+		CMatrix<Double> sorted = Matrix.sortByColumn(column, cMatrix, false);
 		
 		boolean isSorted = true;
 		
@@ -91,7 +91,7 @@ class MatrixTest
 	}
 	
 	@Test
-	void sortAscendingDMatrix()
+	void sortByColumnAscendingDMatrix()
 	{
 		int column = 5;
 		int height = 20;
@@ -99,7 +99,7 @@ class MatrixTest
 		
 		DMatrix matrix = new DMatrix(height, width);
 		matrix.intRandomise(1, 100);
-		DMatrix sorted = Matrix.sort(column, matrix);
+		DMatrix sorted = Matrix.sortByColumn(column, matrix);
 		
 		boolean isSorted = true;
 		
@@ -116,7 +116,7 @@ class MatrixTest
 	}
 	
 	@Test
-	void sortDescendingDMatrix()
+	void sortByColumnDescendingDMatrix()
 	{
 		int column = 5;
 		int height = 20;
@@ -124,7 +124,7 @@ class MatrixTest
 		
 		DMatrix matrix = new DMatrix(height, width);
 		matrix.intRandomise(1, 100);
-		DMatrix sorted = Matrix.sort(column, matrix, false);
+		DMatrix sorted = Matrix.sortByColumn(column, matrix, false);
 		
 		boolean isSorted = true;
 		
@@ -141,7 +141,7 @@ class MatrixTest
 	}
 	
 	@Test
-	void sortAscendingCMatrixMergeSort()
+	void sortByColumnAscendingCMatrixMergeSort()
 	{
 		int column = 5;
 		int height = 20;
@@ -150,7 +150,7 @@ class MatrixTest
 		DMatrix dMatrix = new DMatrix(height, width);
 		dMatrix.intRandomise(1, 100);
 		CMatrix<Double> cMatrix = ConvertMatrix.toComparable(dMatrix);
-		CMatrix<Double> sorted = Matrix.mergeSort(column, cMatrix);
+		CMatrix<Double> sorted = Matrix.mergeSortByColumn(column, cMatrix);
 		
 		boolean isSorted = true;
 		
@@ -167,7 +167,7 @@ class MatrixTest
 	}
 	
 	@Test
-	void sortDescendingCMatrixMergeSort()
+	void sortByColumnDescendingCMatrixMergeSort()
 	{
 		int column = 5;
 		int height = 20;
@@ -176,7 +176,7 @@ class MatrixTest
 		DMatrix dMatrix = new DMatrix(height, width);
 		dMatrix.intRandomise(1, 100);
 		CMatrix<Double> cMatrix = ConvertMatrix.toComparable(dMatrix);
-		CMatrix<Double> sorted = Matrix.mergeSort(column, cMatrix, false);
+		CMatrix<Double> sorted = Matrix.mergeSortByColumn(column, cMatrix, false);
 		
 		boolean isSorted = true;
 		
@@ -193,7 +193,7 @@ class MatrixTest
 	}
 	
 	@Test
-	void sortAscendingCMatrixInsertionSort()
+	void sortByColumnAscendingCMatrixInsertionSort()
 	{
 		int column = 5;
 		int height = 20;
@@ -202,7 +202,7 @@ class MatrixTest
 		DMatrix dMatrix = new DMatrix(height, width);
 		dMatrix.intRandomise(1, 100);
 		CMatrix<Double> cMatrix = ConvertMatrix.toComparable(dMatrix);
-		CMatrix<Double> sorted = Matrix.insertionSort(column, cMatrix);
+		CMatrix<Double> sorted = Matrix.insertionSortByColumn(column, cMatrix);
 		
 		boolean isSorted = true;
 		
@@ -219,7 +219,7 @@ class MatrixTest
 	}
 	
 	@Test
-	void sortDescendingCMatrixInsertionSort()
+	void sortByColumnDescendingCMatrixInsertionSort()
 	{
 		int column = 5;
 		int height = 20;
@@ -228,7 +228,7 @@ class MatrixTest
 		DMatrix dMatrix = new DMatrix(height, width);
 		dMatrix.intRandomise(1, 100);
 		CMatrix<Double> cMatrix = ConvertMatrix.toComparable(dMatrix);
-		CMatrix<Double> sorted = Matrix.insertionSort(column, cMatrix, false);
+		CMatrix<Double> sorted = Matrix.insertionSortByColumn(column, cMatrix, false);
 		
 		boolean isSorted = true;
 		
@@ -245,7 +245,7 @@ class MatrixTest
 	}
 	
 	@Test
-	void sortAscendingCMatrixQuickSort()
+	void sortByColumnAscendingCMatrixQuickSort()
 	{
 		int column = 0;
 		int height = 5;
@@ -254,7 +254,7 @@ class MatrixTest
 		DMatrix dMatrix = new DMatrix(height, width);
 		dMatrix.intRandomise(1, 100);
 		CMatrix<Double> cMatrix = ConvertMatrix.toComparable(dMatrix);
-		CMatrix<Double> sorted = Matrix.quickSort(column, cMatrix);
+		CMatrix<Double> sorted = Matrix.quickSortByColumn(column, cMatrix);
 		
 		boolean isSorted = true;
 		
@@ -271,7 +271,7 @@ class MatrixTest
 	}
 	
 	@Test
-	void sortDescendingCMatrixQuickSort()
+	void sortByColumnDescendingCMatrixQuickSort()
 	{
 		int column = 5;
 		int height = 20;
@@ -280,7 +280,7 @@ class MatrixTest
 		DMatrix dMatrix = new DMatrix(height, width);
 		dMatrix.intRandomise(1, 100);
 		CMatrix<Double> cMatrix = ConvertMatrix.toComparable(dMatrix);
-		CMatrix<Double> sorted = Matrix.quickSort(column, cMatrix, false);
+		CMatrix<Double> sorted = Matrix.quickSortByColumn(column, cMatrix, false);
 		
 		boolean isSorted = true;
 		

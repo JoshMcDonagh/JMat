@@ -217,7 +217,7 @@ public class CMatrix<T extends Comparable<T>> extends GMatrix<T>
 	 */
 	public T columnMin(int index)
 	{
-		return Matrix.sort(index, this).get(0, index);
+		return Matrix.sortByColumn(index, this).get(0, index);
 	}
 	
 	/**
@@ -227,7 +227,7 @@ public class CMatrix<T extends Comparable<T>> extends GMatrix<T>
 	 */
 	public T columnMax(int index)
 	{
-		return Matrix.sort(index, this, false).get(0, index);
+		return Matrix.sortByColumn(index, this, false).get(0, index);
 	}
 	
 	/**
@@ -237,7 +237,7 @@ public class CMatrix<T extends Comparable<T>> extends GMatrix<T>
 	 */
 	public T rowMin(int index)
 	{
-		return Matrix.sort(index, transpose()).get(0, index);
+		return Matrix.sortByColumn(index, transpose()).get(0, index);
 	}
 	
 	/**
@@ -247,6 +247,6 @@ public class CMatrix<T extends Comparable<T>> extends GMatrix<T>
 	 */
 	public T rowMax(int index)
 	{
-		return Matrix.sort(index, transpose(), false).get(0, index);
+		return Matrix.sortByColumn(index, transpose(), false).get(0, index);
 	}
 }

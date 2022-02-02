@@ -31,7 +31,7 @@ public interface Discretise
 		for (int i = 0; i < doubleMatrix.width(); i++)
 		{
 			bins.add(new ArrayList<Bin>());
-			DMatrix matrixColumn = Matrix.sort(0, doubleMatrix.getColumns(i, i + 1));
+			DMatrix matrixColumn = Matrix.sortByColumn(0, doubleMatrix.getColumns(i, i + 1));
 			for (int j = 0; j < numOfBins; j++)
 			{
 				String binValue = "" + j;

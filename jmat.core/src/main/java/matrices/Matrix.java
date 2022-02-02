@@ -25,6 +25,7 @@ public interface Matrix
 		return identityMatrix;
 	}
 	
+	
 	/**
 	 * Sorts the contents of a comparable matrix by a given column index in either an ascending or descending way.
 	 * @param <T> Type of data that the given matrix contains
@@ -33,7 +34,7 @@ public interface Matrix
 	 * @param ascending Boolean value which is {@code true} if the matrix is to be sorted in an ascending way, otherwise {@code false}
 	 * @return The sorted comparable matrix
 	 */
-	public static <T extends Comparable<T>> CMatrix<T> sort(int index, CMatrix<T> matrix, boolean ascending)
+	public static <T extends Comparable<T>> CMatrix<T> sortByColumn(int index, CMatrix<T> matrix, boolean ascending)
 	{
 		return MatSorter.mergeSort(index, matrix, ascending);
 	}
@@ -45,9 +46,9 @@ public interface Matrix
 	 * @param matrix Comparable matrix to sort
 	 * @return The sorted comparable matrix
 	 */
-	public static <T extends Comparable<T>> CMatrix<T> sort(int index, CMatrix<T> matrix)
+	public static <T extends Comparable<T>> CMatrix<T> sortByColumn(int index, CMatrix<T> matrix)
 	{
-		return sort(index, matrix, true);
+		return sortByColumn(index, matrix, true);
 	}
 	
 	/**
@@ -57,7 +58,7 @@ public interface Matrix
 	 * @param ascending Boolean value which is {@code true} if the matrix is to be sorted in an ascending way, otherwise {@code false}
 	 * @return The sorted double matrix
 	 */
-	public static DMatrix sort(int index, DMatrix matrix, boolean ascending)
+	public static DMatrix sortByColumn(int index, DMatrix matrix, boolean ascending)
 	{
 		return MatSorter.recursiveBucketSort(index, matrix, ascending);
 	}
@@ -68,9 +69,9 @@ public interface Matrix
 	 * @param matrix Double matrix to sort
 	 * @return The sorted double matrix
 	 */
-	public static DMatrix sort(int index, DMatrix matrix)
+	public static DMatrix sortByColumn(int index, DMatrix matrix)
 	{
-		return sort(index, matrix, true);
+		return sortByColumn(index, matrix, true);
 	}
 	
 	/**
@@ -81,7 +82,7 @@ public interface Matrix
 	 * @param ascending Boolean value which is {@code true} if the matrix is to be sorted in an ascending way, otherwise {@code false}
 	 * @return The sorted comparable matrix
 	 */
-	public static <T extends Comparable<T>> CMatrix<T> mergeSort(int index, CMatrix<T> matrix, boolean ascending)
+	public static <T extends Comparable<T>> CMatrix<T> mergeSortByColumn(int index, CMatrix<T> matrix, boolean ascending)
 	{
 		return MatSorter.mergeSort(index, matrix, ascending);
 	}
@@ -93,9 +94,9 @@ public interface Matrix
 	 * @param matrix Comparable matrix to sort
 	 * @return The sorted comparable matrix
 	 */
-	public static <T extends Comparable<T>> CMatrix<T> mergeSort(int index, CMatrix<T> matrix)
+	public static <T extends Comparable<T>> CMatrix<T> mergeSortByColumn(int index, CMatrix<T> matrix)
 	{
-		return mergeSort(index, matrix, true);
+		return mergeSortByColumn(index, matrix, true);
 	}
 	
 	/**
@@ -106,7 +107,7 @@ public interface Matrix
 	 * @param ascending Boolean value which is {@code true} if the matrix is to be sorted in an ascending way, otherwise {@code false}
 	 * @return The sorted comparable matrix
 	 */
-	public static <T extends Comparable<T>> CMatrix<T> insertionSort(int index, CMatrix<T> matrix, boolean ascending)
+	public static <T extends Comparable<T>> CMatrix<T> insertionSortByColumn(int index, CMatrix<T> matrix, boolean ascending)
 	{
 		return MatSorter.insertionSort(index, matrix, ascending);
 	}
@@ -118,9 +119,9 @@ public interface Matrix
 	 * @param matrix Comparable matrix to sort
 	 * @return The sorted comparable matrix
 	 */
-	public static <T extends Comparable<T>> CMatrix<T> insertionSort(int index, CMatrix<T> matrix)
+	public static <T extends Comparable<T>> CMatrix<T> insertionSortByColumn(int index, CMatrix<T> matrix)
 	{
-		return insertionSort(index, matrix, true);
+		return insertionSortByColumn(index, matrix, true);
 	}
 	
 	/**
@@ -131,7 +132,7 @@ public interface Matrix
 	 * @param ascending Boolean value which is {@code true} if the matrix is to be sorted in an ascending way, otherwise {@code false}
 	 * @return The sorted comparable matrix
 	 */
-	public static <T extends Comparable<T>> CMatrix<T> quickSort(int index, CMatrix<T> matrix, boolean ascending)
+	public static <T extends Comparable<T>> CMatrix<T> quickSortByColumn(int index, CMatrix<T> matrix, boolean ascending)
 	{
 		return MatSorter.quickSort(index, matrix, ascending);
 	}
@@ -143,9 +144,9 @@ public interface Matrix
 	 * @param matrix Comparable matrix to sort
 	 * @return The sorted comparable matrix
 	 */
-	public static <T extends Comparable<T>> CMatrix<T> quickSort(int index, CMatrix<T> matrix)
+	public static <T extends Comparable<T>> CMatrix<T> quickSortByColumn(int index, CMatrix<T> matrix)
 	{
-		return quickSort(index, matrix, true);
+		return quickSortByColumn(index, matrix, true);
 	}
 	
 	/**
