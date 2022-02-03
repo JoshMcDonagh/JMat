@@ -1,5 +1,6 @@
 package test.java.matrices;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
@@ -62,6 +63,7 @@ class MatrixTest
 		}
 		
 		assertTrue(isSorted);
+		assertTrue(cMatrix.equivalentTo(sorted));
 	}
 	
 	@Test
@@ -88,6 +90,7 @@ class MatrixTest
 		}
 		
 		assertTrue(isSorted);
+		assertTrue(cMatrix.equivalentTo(sorted));
 	}
 	
 	@Test
@@ -114,6 +117,7 @@ class MatrixTest
 		}
 		
 		assertTrue(isSorted);
+		assertTrue(cMatrix.equivalentTo(sorted));
 	}
 	
 	@Test
@@ -140,6 +144,7 @@ class MatrixTest
 		}
 		
 		assertTrue(isSorted);
+		assertTrue(cMatrix.equivalentTo(sorted));
 	}
 	
 	@Test
@@ -165,6 +170,7 @@ class MatrixTest
 		}
 		
 		assertTrue(isSorted);
+		assertTrue(matrix.equivalentTo(sorted));
 	}
 	
 	@Test
@@ -190,6 +196,7 @@ class MatrixTest
 		}
 		
 		assertTrue(isSorted);
+		assertTrue(matrix.equivalentTo(sorted));
 	}
 	
 	@Test
@@ -215,6 +222,7 @@ class MatrixTest
 		}
 		
 		assertTrue(isSorted);
+		assertTrue(matrix.equivalentTo(sorted));
 	}
 	
 	@Test
@@ -240,6 +248,7 @@ class MatrixTest
 		}
 		
 		assertTrue(isSorted);
+		assertTrue(matrix.equivalentTo(sorted));
 	}
 	
 	@Test
@@ -266,6 +275,7 @@ class MatrixTest
 		}
 		
 		assertTrue(isSorted);
+		assertTrue(cMatrix.equivalentTo(sorted));
 	}
 	
 	@Test
@@ -292,6 +302,7 @@ class MatrixTest
 		}
 		
 		assertTrue(isSorted);
+		assertTrue(cMatrix.equivalentTo(sorted));
 	}
 	
 	@Test
@@ -318,6 +329,7 @@ class MatrixTest
 		}
 		
 		assertTrue(isSorted);
+		assertTrue(cMatrix.equivalentTo(sorted));
 	}
 	
 	@Test
@@ -344,6 +356,7 @@ class MatrixTest
 		}
 		
 		assertTrue(isSorted);
+		assertTrue(cMatrix.equivalentTo(sorted));
 	}
 	
 	@Test
@@ -370,6 +383,7 @@ class MatrixTest
 		}
 		
 		assertTrue(isSorted);
+		assertTrue(cMatrix.equivalentTo(sorted));
 	}
 	
 	@Test
@@ -396,6 +410,7 @@ class MatrixTest
 		}
 		
 		assertTrue(isSorted);
+		assertTrue(cMatrix.equivalentTo(sorted));
 	}
 	
 	@Test
@@ -422,6 +437,7 @@ class MatrixTest
 		}
 		
 		assertTrue(isSorted);
+		assertTrue(cMatrix.equivalentTo(sorted));
 	}
 	
 	@Test
@@ -448,6 +464,7 @@ class MatrixTest
 		}
 		
 		assertTrue(isSorted);
+		assertTrue(cMatrix.equivalentTo(sorted));
 	}
 	
 	@Test
@@ -474,6 +491,7 @@ class MatrixTest
 		}
 		
 		assertTrue(isSorted);
+		assertTrue(cMatrix.equivalentTo(sorted));
 	}
 	
 	@Test
@@ -500,6 +518,7 @@ class MatrixTest
 		}
 		
 		assertTrue(isSorted);
+		assertTrue(cMatrix.equivalentTo(sorted));
 	}
 	
 	@Test
@@ -526,6 +545,7 @@ class MatrixTest
 		}
 		
 		assertTrue(isSorted);
+		assertTrue(cMatrix.equivalentTo(sorted));
 	}
 	
 	@Test
@@ -552,6 +572,7 @@ class MatrixTest
 		}
 		
 		assertTrue(isSorted);
+		assertTrue(cMatrix.equivalentTo(sorted));
 	}
 	
 	@Test

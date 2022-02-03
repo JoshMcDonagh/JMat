@@ -293,7 +293,7 @@ class CMatrixTest
 		CMatrix<Integer> matrix1 = new CMatrix<Integer>(integers1);
 		CMatrix<Integer> matrix2 = new CMatrix<Integer>(integers2);
 		
-		assertEquals(matrix1.equalTo(matrix2), true);
+		assertTrue(matrix1.equalTo(matrix2));
 	}
 	
 	@Test
@@ -314,7 +314,7 @@ class CMatrixTest
 		CMatrix<Integer> matrix1 = new CMatrix<Integer>(integers1);
 		CMatrix<Integer> matrix2 = new CMatrix<Integer>(integers2);
 		
-		assertEquals(matrix1.equalTo(matrix2), false);
+		assertFalse(matrix1.equalTo(matrix2));
 	}
 	
 	@Test
@@ -337,7 +337,7 @@ class CMatrixTest
 		CMatrix<Integer> matrix1 = new CMatrix<Integer>(integers1);
 		CMatrix<Integer> matrix2 = new CMatrix<Integer>(integers2);
 		
-		assertEquals(matrix1.equivalentTo(matrix2), true);
+		assertTrue(matrix1.equivalentTo(matrix2));
 	}
 	
 	@Test
@@ -360,7 +360,7 @@ class CMatrixTest
 		CMatrix<Integer> matrix1 = new CMatrix<Integer>(integers1);
 		CMatrix<Integer> matrix2 = new CMatrix<Integer>(integers2);
 		
-		assertEquals(matrix1.equivalentTo(matrix2), false);
+		assertFalse(matrix1.equivalentTo(matrix2));
 	}
 	
 	@Test
