@@ -52,6 +52,31 @@ public interface Matrix
 	}
 	
 	/**
+	 * Sorts the contents of a comparable matrix by a given row index in an ascending way.
+	 * @param <T> Type of data that the given matrix contains
+	 * @param index Row index to base the sort process on
+	 * @param matrix Comparable matrix to sort
+	 * @param ascending Boolean value which is {@code true} if the matrix is to be sorted in an ascending way, otherwise {@code false}
+	 * @return The sorted comparable matrix
+	 */
+	public static <T extends Comparable<T>> CMatrix<T> sortByRow(int index, CMatrix<T> matrix, boolean ascending)
+	{
+		return sortByColumn(index, matrix.transpose(), ascending).transpose();
+	}
+	
+	/**
+	 * Sorts the contents of a comparable matrix by a given row index in an ascending way.
+	 * @param <T> Type of data that the given matrix contains
+	 * @param index Row index to base the sort process on
+	 * @param matrix Comparable matrix to sort
+	 * @return The sorted comparable matrix
+	 */
+	public static <T extends Comparable<T>> CMatrix<T> sortByRow(int index, CMatrix<T> matrix)
+	{
+		return sortByRow(index, matrix, true);
+	}
+	
+	/**
 	 * Sorts the contents of a double matrix by a given column index in either an ascending or descending way.
 	 * @param index Column index to base the sort process on
 	 * @param matrix Double matrix to sort
@@ -75,7 +100,30 @@ public interface Matrix
 	}
 	
 	/**
-	 * Sorts the contents of a comparable matrix using merge sort.
+	 * Sorts the contents of a double matrix by a given row index in either an ascending or descending way.
+	 * @param index Row index to base the sort process on
+	 * @param matrix Double matrix to sort
+	 * @param ascending Boolean value which is {@code true} if the matrix is to be sorted in an ascending way, otherwise {@code false}
+	 * @return The sorted double matrix
+	 */
+	public static DMatrix sortByRow(int index, DMatrix matrix, boolean ascending)
+	{
+		return sortByColumn(index, matrix.transpose(), ascending).transpose();
+	}
+	
+	/**
+	 * Sorts the contents of a double matrix by a given row index in an ascending way.
+	 * @param index Row index to base the sort process on
+	 * @param matrix Double matrix to sort
+	 * @return The sorted double matrix
+	 */
+	public static DMatrix sortByRow(int index, DMatrix matrix)
+	{
+		return sortByRow(index, matrix, true);
+	}
+	
+	/**
+	 * Sorts the contents of a comparable matrix using merge sort by a given column index in either an ascending or descending way.
 	 * @param <T> Type of data that the given matrix contains
 	 * @param index Column index to base the sort process on
 	 * @param matrix Comparable matrix to sort
@@ -88,7 +136,7 @@ public interface Matrix
 	}
 	
 	/**
-	 * Sorts the contents of a comparable matrix using merge sort.
+	 * Sorts the contents of a comparable matrix using merge sort by a given column index in an ascending way.
 	 * @param <T> Type of data that the given matrix contains
 	 * @param index Column index to base the sort process on
 	 * @param matrix Comparable matrix to sort
@@ -100,7 +148,32 @@ public interface Matrix
 	}
 	
 	/**
-	 * Sorts the contents of a comparable matrix using insertion sort.
+	 * Sorts the contents of a comparable matrix using merge sort by a given row index in either an ascending or descending way.
+	 * @param <T> Type of data that the given matrix contains
+	 * @param index Row index to base the sort process on
+	 * @param matrix Comparable matrix to sort
+	 * @param ascending Boolean value which is {@code true} if the matrix is to be sorted in an ascending way, otherwise {@code false}
+	 * @return The sorted comparable matrix
+	 */
+	public static <T extends Comparable<T>> CMatrix<T> mergeSortByRow(int index, CMatrix<T> matrix, boolean ascending)
+	{
+		return mergeSortByColumn(index, matrix.transpose(), ascending).transpose();
+	}
+	
+	/**
+	 * Sorts the contents of a comparable matrix using merge sort by a given row index in an ascending way.
+	 * @param <T> Type of data that the given matrix contains
+	 * @param index Row index to base the sort process on
+	 * @param matrix Comparable matrix to sort
+	 * @return The sorted comparable matrix
+	 */
+	public static <T extends Comparable<T>> CMatrix<T> mergeSortByRow(int index, CMatrix<T> matrix)
+	{
+		return mergeSortByRow(index, matrix, true);
+	}
+	
+	/**
+	 * Sorts the contents of a comparable matrix using insertion sort by a given column index in either an ascending or descending way.
 	 * @param <T> Type of data that the given matrix contains
 	 * @param index Column index to base the sort process on
 	 * @param matrix Comparable matrix to sort
@@ -113,7 +186,7 @@ public interface Matrix
 	}
 	
 	/**
-	 * Sorts the contents of a comparable matrix using insertion sort.
+	 * Sorts the contents of a comparable matrix using insertion sort by a given column index in an ascending way.
 	 * @param <T> Type of data that the given matrix contains
 	 * @param index Column index to base the sort process on
 	 * @param matrix Comparable matrix to sort
@@ -125,7 +198,32 @@ public interface Matrix
 	}
 	
 	/**
-	 * Sorts the contents of a comparable matrix using quick sort.
+	 * Sorts the contents of a comparable matrix using insertion sort by a given row index in either an ascending or descending way.
+	 * @param <T> Type of data that the given matrix contains
+	 * @param index Row index to base the sort process on
+	 * @param matrix Comparable matrix to sort
+	 * @param ascending Boolean value which is {@code true} if the matrix is to be sorted in an ascending way, otherwise {@code false}
+	 * @return The sorted comparable matrix
+	 */
+	public static <T extends Comparable<T>> CMatrix<T> insertionSortByRow(int index, CMatrix<T> matrix, boolean ascending)
+	{
+		return insertionSortByColumn(index, matrix.transpose(), ascending).transpose();
+	}
+	
+	/**
+	 * Sorts the contents of a comparable matrix using insertion sort by a given row index in an ascending way.
+	 * @param <T> Type of data that the given matrix contains
+	 * @param index Row index to base the sort process on
+	 * @param matrix Comparable matrix to sort
+	 * @return The sorted comparable matrix
+	 */
+	public static <T extends Comparable<T>> CMatrix<T> insertionSortByRow(int index, CMatrix<T> matrix)
+	{
+		return insertionSortByRow(index, matrix, true);
+	}
+	
+	/**
+	 * Sorts the contents of a comparable matrix using quick sort by a given column index in either an ascending or descending way.
 	 * @param <T> Type of data that the given matrix contains
 	 * @param index Column index to base the sort process on
 	 * @param matrix Comparable matrix to sort
@@ -138,7 +236,7 @@ public interface Matrix
 	}
 	
 	/**
-	 * Sorts the contents of a comparable matrix using quick sort.
+	 * Sorts the contents of a comparable matrix using quick sort by a given column index in an ascending way.
 	 * @param <T> Type of data that the given matrix contains
 	 * @param index Column index to base the sort process on
 	 * @param matrix Comparable matrix to sort
@@ -147,6 +245,31 @@ public interface Matrix
 	public static <T extends Comparable<T>> CMatrix<T> quickSortByColumn(int index, CMatrix<T> matrix)
 	{
 		return quickSortByColumn(index, matrix, true);
+	}
+	
+	/**
+	 * Sorts the contents of a comparable matrix using quick sort by a given column index in either an ascending or descending way.
+	 * @param <T> Type of data that the given matrix contains
+	 * @param index Column index to base the sort process on
+	 * @param matrix Comparable matrix to sort
+	 * @param ascending Boolean value which is {@code true} if the matrix is to be sorted in an ascending way, otherwise {@code false}
+	 * @return The sorted comparable matrix
+	 */
+	public static <T extends Comparable<T>> CMatrix<T> quickSortByRow(int index, CMatrix<T> matrix, boolean ascending)
+	{
+		return quickSortByColumn(index, matrix.transpose(), ascending).transpose();
+	}
+	
+	/**
+	 * Sorts the contents of a comparable matrix using quick sort by a given row index in an ascending way.
+	 * @param <T> Type of data that the given matrix contains
+	 * @param index Row index to base the sort process on
+	 * @param matrix Comparable matrix to sort
+	 * @return The sorted comparable matrix
+	 */
+	public static <T extends Comparable<T>> CMatrix<T> quickSortByRow(int index, CMatrix<T> matrix)
+	{
+		return quickSortByRow(index, matrix, true);
 	}
 	
 	/**
