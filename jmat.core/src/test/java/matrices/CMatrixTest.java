@@ -318,6 +318,52 @@ class CMatrixTest
 	}
 	
 	@Test
+	void trueEquivalentTo()
+	{
+		Integer[][] integers1 = {
+				{4, 7, 3, 5, 5},
+				{2, 1, 4, 4, 2},
+				{1, 3, 6, 4, 9}
+		};
+		
+		Integer[][] integers2 = {
+				{4, 9, 3},
+				{2, 4, 1},
+				{6, 3, 1},
+				{4, 5, 4},
+				{2, 5, 7}
+		};
+		
+		CMatrix<Integer> matrix1 = new CMatrix<Integer>(integers1);
+		CMatrix<Integer> matrix2 = new CMatrix<Integer>(integers2);
+		
+		assertEquals(matrix1.equivalentTo(matrix2), true);
+	}
+	
+	@Test
+	void falseEquivalentTo()
+	{
+		Integer[][] integers1 = {
+				{4, 7, 3, 5, 5},
+				{2, 1, 4, 4, 2},
+				{1, 3, 6, 4, 9}
+		};
+		
+		Integer[][] integers2 = {
+				{4, 9, 3},
+				{2, 4, 1},
+				{6, 1, 1},
+				{4, 5, 4},
+				{2, 5, 7}
+		};
+		
+		CMatrix<Integer> matrix1 = new CMatrix<Integer>(integers1);
+		CMatrix<Integer> matrix2 = new CMatrix<Integer>(integers2);
+		
+		assertEquals(matrix1.equivalentTo(matrix2), false);
+	}
+	
+	@Test
 	void trueContains()
 	{
 		Integer[][] integers1 = {

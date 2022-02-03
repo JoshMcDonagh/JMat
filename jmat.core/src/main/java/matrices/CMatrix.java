@@ -1,6 +1,7 @@
 package main.java.matrices;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * This GMatrix represents a comparable matrix that contains comparable objects.
@@ -182,6 +183,45 @@ public class CMatrix<T extends Comparable<T>> extends GMatrix<T>
 			{
 				if (get(i, j).compareTo(matrix.get(i, j)) != 0)
 					return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	/**
+	 * Evaluates whether a given comparable matrix has the same content (though not necessarily ordered in the same way) as this matrix.
+	 * @param matrix Comparable matrix to compare with
+	 * @return Boolean value which is {@code true} if the matrices are equivalent, otherwise {@code false}
+	 */
+	public boolean equivalentTo(CMatrix<T> matrix)
+	{
+		HashMap<T, Integer> matrixValues = new HashMap<T, Integer>();
+		
+		// Adds items from this matrix as keys to a hash map with the quantities of each being given as values
+		for (int i = 0; i < height(); i++)
+		{
+			for (int j = 0; j < width(); j++)
+			{
+				T value = get(i, j);
+				if (!matrixValues.containsKey(value))
+					matrixValues.put(value, 1);
+				else
+					matrixValues.put(value, matrixValues.get(value) + 1);
+			}
+		}
+		
+		// Checks to make sure the same values and the same quantity of values exist in the given matrix
+		for (int i = 0; i < matrix.height(); i++)
+		{
+			for (int j = 0; j < matrix.width(); j++)
+			{
+				T value = matrix.get(i, j);
+				
+				if (!matrixValues.containsKey(value) || matrixValues.get(value) < 1)
+					return false;
+				
+				matrixValues.put(value, matrixValues.get(value) - 1);
 			}
 		}
 		
