@@ -25,7 +25,6 @@ public interface Matrix
 		return identityMatrix;
 	}
 	
-	
 	/**
 	 * Sorts the contents of a comparable matrix by a given column index in either an ascending or descending way.
 	 * @param <T> Type of data that the given matrix contains
