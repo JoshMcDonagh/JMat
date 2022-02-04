@@ -240,6 +240,18 @@ public class GMatrix<T> implements Matrix, Iterable<T>
 		normalise();
 	}
 	
+	/** 
+	 * Appends the rows of a given matrix to the end of the matrix.
+	 * @param matrix The given matrix to append to this matrix
+	 */
+	public void addRows(GMatrix<T> matrix)
+	{
+		ArrayList<ArrayList<T>> newRows = matrix.matrixData;
+		for (int i = 0; i < newRows.size(); i++)
+			matrixData.add(newRows.get(i));
+		normalise();
+	}
+	
 	/**
 	 * Appends a set of values as a new column in the matrix.
 	 * @param values Set of values to append as a column
@@ -248,6 +260,22 @@ public class GMatrix<T> implements Matrix, Iterable<T>
 	{
 		GMatrix<T> transposed = transpose();
 		transposed.matrixData.add(new ArrayList<>(Arrays.asList(values)));
+		transposed.normalise();
+		matrixData = transposed.transpose().matrixData;
+		normalise();
+	}
+	
+	/**
+	 * Appends the columns of a given matrix to the end of the matrix.
+	 * @param matrix The given matrix to append to this matrix
+	 */
+	public void addColumns(GMatrix<T> matrix)
+	{
+		GMatrix<T> transposed = transpose();
+		ArrayList<ArrayList<T>> newColumns = matrix.transpose().matrixData;
+		for (int i = 0; i < newColumns.size(); i++)
+			transposed.matrixData.add(newColumns.get(i));
+		transposed.normalise();
 		matrixData = transposed.transpose().matrixData;
 		normalise();
 	}

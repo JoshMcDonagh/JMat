@@ -265,6 +265,42 @@ class GMatrixTest
 	}
 	
 	@Test
+	void addRows()
+	{
+		Integer[][] integers1 = {
+				{4, 7, 3, 5, 5},
+				{2, 1, 4, 4, 2},
+				{1, 3, 6, 4, 9}
+		};
+		
+		Integer[][] integers2 = {
+				{4, 2, 1, 4, 6},
+				{3, 1, 7, 4, 4}
+		};
+		
+		Integer[][] integers3 = {
+				{4, 7, 3, 5, 5},
+				{2, 1, 4, 4, 2},
+				{1, 3, 6, 4, 9},
+				{4, 2, 1, 4, 6},
+				{3, 1, 7, 4, 4}
+		};
+		
+		GMatrix<Integer> matrix = new GMatrix<Integer>(integers1);
+		matrix.addRows(new GMatrix<Integer>(integers2));
+		
+		assertEquals(integers3.length, matrix.height());
+		assertEquals(integers3[0].length, matrix.width());
+		
+		for (int i = 0; i < integers3.length; i++)
+		{
+			Integer[] row = integers3[i];
+			for (int j = 0; j < row.length; j++)
+				assertEquals(row[j], matrix.get(i, j));
+		}
+	}
+	
+	@Test
 	void addColumn()
 	{
 		Integer[] integers = {4, 7, 3, 5, 5};
@@ -277,6 +313,38 @@ class GMatrixTest
 		
 		for (int i = 0; i < integers.length; i++)
 			assertEquals(matrix.get(i, 0), integers[i]);
+	}
+	
+	@Test
+	void addColumns()
+	{
+		Integer[][] integers1 = {
+				{4, 7, 3, 5, 5},
+				{2, 1, 4, 4, 2}
+		};
+		
+		Integer[][] integers2 = {
+				{4, 2, 1},
+				{3, 1, 7}
+		};
+		
+		Integer[][] integers3 = {
+				{4, 7, 3, 5, 5, 4, 2, 1},
+				{2, 1, 4, 4, 2, 3, 1, 7}
+		};
+		
+		GMatrix<Integer> matrix = new GMatrix<Integer>(integers1);
+		matrix.addColumns(new GMatrix<Integer>(integers2));
+		
+		assertEquals(integers3.length, matrix.height());
+		assertEquals(integers3[0].length, matrix.width());
+		
+		for (int i = 0; i < integers3.length; i++)
+		{
+			Integer[] row = integers3[i];
+			for (int j = 0; j < row.length; j++)
+				assertEquals(row[j], matrix.get(i, j));
+		}
 	}
 	
 	@Test
