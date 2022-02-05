@@ -35,7 +35,7 @@ public interface Matrix
 	 */
 	public static <T extends Comparable<T>> CMatrix<T> sortByColumn(int index, CMatrix<T> matrix, boolean ascending)
 	{
-		return MatSorter.mergeSort(index, matrix, ascending);
+		return MatSorter.quickSort(index, matrix, ascending);
 	}
 	
 	/**
