@@ -9,10 +9,14 @@ import java.util.Objects;
 import java.util.Random;
 
 public class MarkovModel {
+	private String currentState;
+	
 	private HashMap<String, Integer> stateIndexes = new HashMap<String, Integer>();
 	private DMatrix stochasticMatrix = null;
 	
-	private String currentState;
+	public DMatrix getAsStochasticMatrix() {
+		return stochasticMatrix;
+	}
 	
 	public void addState(String stateName) {
 		stateIndexes.put(stateName, stateIndexes.size());
@@ -48,7 +52,7 @@ public class MarkovModel {
 		stochasticMatrix.set(rowIndex, columnIndex, probability);
 	}
 	
-	public void run(String startingState, int numberOfRuns) throws Exception {
+	public MarkovModelResults run(String startingState, int numberOfRuns) throws Exception {
 		if (!areProbabilitiesValid())
 			throw new Exception("Transition probabilities are invalid.");
 		
@@ -57,12 +61,17 @@ public class MarkovModel {
 		
 		Random random = new Random();
 		currentState = startingState;
+		String[] statesForEachTurn = new String[numberOfRuns];
 		
 		for (int run = 0; run < numberOfRuns; run++) {
 			int currentStateRowIndex = stateIndexes.get(currentState);
-			
 			double randomDouble = random.nextDouble();
 			double accumulatedProbabilities = 0.0;
+			
+			statesForEachTurn[run] = currentState;
+			
+			if (run >= numberOfRuns-1)
+				break;
 			
 			for (int i = 0; i < stateIndexes.size(); i++) {
 				accumulatedProbabilities += stochasticMatrix.get(currentStateRowIndex, i);
@@ -72,6 +81,8 @@ public class MarkovModel {
 				}
 			}
 		}
+		
+		return new MarkovModelResults(statesForEachTurn);
 	}
 	
 	private String getStateByIndex(Integer stateIndex) {
