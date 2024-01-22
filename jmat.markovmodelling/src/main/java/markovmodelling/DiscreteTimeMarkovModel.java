@@ -1,6 +1,7 @@
 package main.java.markovmodelling;
 
 import main.java.matrices.DMatrix;
+import main.java.matrices.util.MatMaths;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -8,7 +9,7 @@ import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Random;
 
-public class MarkovModel {
+public class DiscreteTimeMarkovModel {
 	private String currentState;
 	
 	private HashMap<String, Integer> stateIndexes = new HashMap<String, Integer>();
@@ -16,6 +17,10 @@ public class MarkovModel {
 	
 	public DMatrix getAsStochasticMatrix() {
 		return stochasticMatrix;
+	}
+	
+	public String[] getStates() {
+		return stateIndexes.keySet().toArray(new String[stateIndexes.size()]);
 	}
 	
 	public void addState(String stateName) {
@@ -82,7 +87,32 @@ public class MarkovModel {
 			}
 		}
 		
-		return new MarkovModelResults(statesForEachTurn);
+		return new MarkovModelResults(getStates(), statesForEachTurn);
+	}
+	
+	public StationaryDistribution getStationaryDistribution(String startingState) {
+		int startingStateIndex = stateIndexes.get(startingState);
+		Double[][] operationInputValues = new Double[1][stateIndexes.size()];
+		
+		for (int i = 0; i < stateIndexes.size(); i++) {
+			double value = 0.0;
+			if (i == startingStateIndex)
+				value = 1.0;
+			operationInputValues[0][i] = value;
+		}
+		
+		DMatrix operationInput = new DMatrix(operationInputValues);
+		DMatrix operationOutput = null;
+		
+		while (operationOutput == null || !operationInput.equalTo(operationOutput))
+			operationOutput = MatMaths.mul(operationInput, stochasticMatrix);
+		
+		HashMap<String, Double> stateDistributions = new HashMap<String, Double>();
+		
+		for (int i = 0; i < stateIndexes.size(); i++)
+			stateDistributions.put(getStateByIndex(i),  operationOutput.get(i, 0));
+		
+		return new StationaryDistribution(stateDistributions);
 	}
 	
 	private String getStateByIndex(Integer stateIndex) {
