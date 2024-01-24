@@ -3,11 +3,14 @@ package main.java.markovmodelling;
 import main.java.matrices.DMatrix;
 import main.java.matrices.util.MatMaths;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Random;
+import java.util.Set;
 
 public class DiscreteTimeMarkovModel {
 	private String currentState;
@@ -57,7 +60,7 @@ public class DiscreteTimeMarkovModel {
 		stochasticMatrix.set(rowIndex, columnIndex, probability);
 	}
 	
-	public MarkovModelResults run(String startingState, int numberOfRuns) throws Exception {
+	public RandomWalkResults performRandomWalk(String startingState, int numberOfRuns) throws Exception {
 		if (!areProbabilitiesValid())
 			throw new Exception("Transition probabilities are invalid.");
 		
@@ -87,7 +90,7 @@ public class DiscreteTimeMarkovModel {
 			}
 		}
 		
-		return new MarkovModelResults(getStates(), statesForEachTurn);
+		return new RandomWalkResults(getStates(), statesForEachTurn);
 	}
 	
 	public StationaryDistribution getStationaryDistribution(String startingState) {
@@ -114,6 +117,71 @@ public class DiscreteTimeMarkovModel {
 		
 		return new StationaryDistribution(stateDistributions);
 	}
+	
+	public String[] getTransientStates() {
+		ArrayList<String> transientStates = new ArrayList<String>();
+		
+		Set<String> recurrentStates = new HashSet<>(Arrays.asList(getRecurrentStates()));
+
+        for (String state : getStates()) {
+            if (!recurrentStates.contains(state))
+                transientStates.add(state);
+        }
+		
+		return transientStates.toArray(new String[transientStates.size()]);
+	}
+	
+	public String[] getRecurrentStates() {
+		ArrayList<String> recurrentStates = new ArrayList<String>();
+		
+		ArrayList<HashSet<String>> communicatingClasses = findCommunicatingClasses();
+        
+        for (HashSet<String> communicatingClass : communicatingClasses) {
+            if (containsRecurrentState(communicatingClass))
+                recurrentStates.addAll(communicatingClass);
+        }
+		
+		return recurrentStates.toArray(new String[recurrentStates.size()]);
+	}
+	
+	private ArrayList<HashSet<String>> findCommunicatingClasses() {
+        ArrayList<HashSet<String>> classes = new ArrayList<>();
+
+        Set<String> visitedStates = new HashSet<>();
+
+        for (String state : getStates()) {
+            if (!visitedStates.contains(state)) {
+                HashSet<String> communicatingClass = new HashSet<>();
+                depthFirstSearch(state, visitedStates, communicatingClass);
+                classes.add(communicatingClass);
+            }
+        }
+
+        return classes;
+    }
+
+    private void depthFirstSearch(String state, Set<String> visitedStates, Set<String> communicatingClass) {
+        visitedStates.add(state);
+        communicatingClass.add(state);
+
+        for (String nextState : getStates()) {
+            if (stochasticMatrix.get(stateIndexes.get(state), stateIndexes.get(nextState)) > 0 && !visitedStates.contains(nextState))
+                depthFirstSearch(nextState, visitedStates, communicatingClass);
+        }
+    }
+
+    private boolean containsRecurrentState(Set<String> communicatingClass) {
+        for (String state : communicatingClass) {
+            if (isRecurrentState(state))
+                return true;
+        }
+        return false;
+    }
+
+    private boolean isRecurrentState(String state) {
+        int stateIndex = stateIndexes.get(state);
+        return stochasticMatrix.get(stateIndex, stateIndex) > 0;
+    }
 	
 	private String getStateByIndex(Integer stateIndex) {
 		for (Entry<String, Integer> entry : stateIndexes.entrySet()) {
