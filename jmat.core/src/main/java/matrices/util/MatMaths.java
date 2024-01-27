@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import main.java.matrices.DMatrix;
 import main.java.matrices.Matrix;
 
+import org.apache.commons.math3.linear.Array2DRowRealMatrix;
+import org.apache.commons.math3.linear.EigenDecomposition;
+import org.apache.commons.math3.linear.RealMatrix;
+import org.apache.commons.math3.linear.RealVector;
+
 /**
  * Interface which is used to access static methods that apple mathematical operations to DMatrix objects.
  * 
@@ -462,4 +467,78 @@ public interface MatMaths
 	{
 		return matrix.transpose();
 	}
+	
+	// !!! Matrix eigenvalues !!!
+	
+	/**
+     * Calculates the eigenvalues of a given double matrix.
+     * @param matrix Double matrix to calculate the eigenvalues for
+     * @return Array of double values representing the eigenvalues
+     */
+	public static double[] eigenvaluesOf(DMatrix matrix) {
+		if (!matrix.isSquare())
+			throw new IllegalArgumentException("To find the eigenvalues, the given matrix must be square.");
+		
+		RealMatrix realMatrix = toRealMatrix(matrix);
+		EigenDecomposition eigenDecomposition = new EigenDecomposition(realMatrix);
+
+        return eigenDecomposition.getRealEigenvalues();
+	}
+	
+	/**
+     * Calculates the eigenvectors of a given double matrix.
+     * @param matrix Double matrix to calculate the eigenvectors for
+     * @return Array of RealVector representing the eigenvectors
+     */
+    public static DMatrix[] eigenvectorsOf(DMatrix matrix) {
+        if (!matrix.isSquare()) {
+            throw new IllegalArgumentException("To find the eigenvectors, the matrix must be square.");
+        }
+
+        RealMatrix realMatrix = toRealMatrix(matrix);
+        EigenDecomposition eigenDecomposition = new EigenDecomposition(realMatrix);
+
+        DMatrix[] eigenvectors = new DMatrix[matrix.height()];
+        for (int i = 0; i < matrix.height(); i++) {
+            eigenvectors[i] = fromRealVector(eigenDecomposition.getEigenvector(i));
+        }
+        
+        return eigenvectors;
+    }
+	
+	/**
+     * Converts a DMatrix to a RealMatrix.
+     * @param matrix DMatrix to be converted
+     * @return RealMatrix equivalent of the input DMatrix
+     */
+	private static RealMatrix toRealMatrix(DMatrix matrix) {
+	    int rows = matrix.height();
+	    int cols = matrix.width();
+
+	    RealMatrix realMatrix = new Array2DRowRealMatrix(rows, cols);
+
+	    for (int i = 0; i < rows; i++) {
+	        for (int j = 0; j < cols; j++) {
+	            realMatrix.setEntry(i, j, matrix.get(i, j));
+	        }
+	    }
+
+	    return realMatrix;
+	}
+	
+	/**
+     * Converts a RealVector to a DMatrix.
+     * @param vector RealVector to be converted
+     * @return DMatrix representing the vector
+     */
+    private static DMatrix fromRealVector(RealVector vector) {
+        int size = vector.getDimension();
+        DMatrix result = new DMatrix(1, size);
+
+        for (int i = 0; i < size; i++) {
+            result.set(0, i, vector.getEntry(i));
+        }
+
+        return result;
+    }
 }

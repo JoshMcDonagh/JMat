@@ -21,8 +21,16 @@ public class RandomWalkResults {
 		}
 	};
 	
-	public String[] getStatesForEachStep() {
+	public String[] getStatesForEachStepAsArray() {
 		return statesForEachStep;
+	}
+	
+	public String getStateAtStep(int step) {
+		return statesForEachStep[step];
+	}
+	
+	public int getNumberOfSteps() {
+		return statesForEachStep.length;
 	}
 	
 	public int getStateFrequency(String stateName) {

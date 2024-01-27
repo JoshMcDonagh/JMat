@@ -16,7 +16,11 @@ public class DiscreteTimeMarkovModel {
 	private String currentState;
 	
 	private HashMap<String, Integer> stateIndexes = new HashMap<String, Integer>();
-	private DMatrix stochasticMatrix = null;
+	private DMatrix stochasticMatrix;
+	
+	public DiscreteTimeMarkovModel() {
+		stochasticMatrix = new DMatrix();
+	}
 	
 	public DMatrix getAsStochasticMatrix() {
 		return stochasticMatrix;
@@ -29,12 +33,14 @@ public class DiscreteTimeMarkovModel {
 	public void addState(String stateName) {
 		stateIndexes.put(stateName, stateIndexes.size());
 		
+		/**
 		if (stochasticMatrix == null)
 		{
 			Double[][] values = {{0.0}};
 			stochasticMatrix = new DMatrix(values);
 			return;
 		}
+		*/
 		
 		Double[] columnValues = new Double[stateIndexes.size()-1];
 		Double[] rowValues = new Double[stateIndexes.size()];
@@ -54,14 +60,20 @@ public class DiscreteTimeMarkovModel {
 		stateIndexes.remove(stateName);
 	}
 	
-	public void addTransition(String sourceState, String destinationState, double probability) {
+	public void setTransitionProbability(String sourceState, String destinationState, double probability) {
 		int rowIndex = stateIndexes.get(sourceState);
 		int columnIndex = stateIndexes.get(destinationState);
 		stochasticMatrix.set(rowIndex, columnIndex, probability);
 	}
 	
-	public RandomWalkResults performRandomWalk(String startingState, int numberOfRuns) throws Exception {
-		if (!areProbabilitiesValid())
+	public double getTransitionProbability(String sourceState, String destinationState) {
+		int rowIndex = stateIndexes.get(sourceState);
+		int columnIndex = stateIndexes.get(destinationState);
+		return stochasticMatrix.get(rowIndex, columnIndex);
+	}
+	
+	public RandomWalkResults performRandomWalk(String startingState, int numberOfSteps) throws Exception {
+		if (!areAllProbabilitiesValid())
 			throw new Exception("Transition probabilities are invalid.");
 		
 		if (!stateIndexes.containsKey(startingState))
@@ -69,16 +81,16 @@ public class DiscreteTimeMarkovModel {
 		
 		Random random = new Random();
 		currentState = startingState;
-		String[] statesForEachTurn = new String[numberOfRuns];
+		String[] statesForEachStep = new String[numberOfSteps];
 		
-		for (int run = 0; run < numberOfRuns; run++) {
+		for (int step = 0; step < numberOfSteps; step++) {
 			int currentStateRowIndex = stateIndexes.get(currentState);
 			double randomDouble = random.nextDouble();
 			double accumulatedProbabilities = 0.0;
 			
-			statesForEachTurn[run] = currentState;
+			statesForEachStep[step] = currentState;
 			
-			if (run >= numberOfRuns-1)
+			if (step >= numberOfSteps-1)
 				break;
 			
 			for (int i = 0; i < stateIndexes.size(); i++) {
@@ -90,10 +102,13 @@ public class DiscreteTimeMarkovModel {
 			}
 		}
 		
-		return new RandomWalkResults(getStates(), statesForEachTurn);
+		return new RandomWalkResults(getStates(), statesForEachStep);
 	}
 	
-	public StationaryDistribution getStationaryDistribution(String startingState) {
+	public StationaryDistribution getStationaryDistribution(String startingState) throws Exception {
+		if (!hasStationaryDistribution())
+			throw new Exception("The markov model does not have a stochastic distribution.");
+		
 		int startingStateIndex = stateIndexes.get(startingState);
 		Double[][] operationInputValues = new Double[1][stateIndexes.size()];
 		
@@ -116,6 +131,20 @@ public class DiscreteTimeMarkovModel {
 			stateDistributions.put(getStateByIndex(i),  operationOutput.get(i, 0));
 		
 		return new StationaryDistribution(stateDistributions);
+	}
+	
+	public boolean hasStationaryDistribution() {
+		if (!areAllProbabilitiesValid())
+			return false;
+		
+		double[] eigenvalues = MatMaths.eigenvaluesOf(stochasticMatrix);
+		for (int i = 0; i < eigenvalues.length; i++) {
+			double eigenvalue = eigenvalues[i];
+			if (Math.abs(eigenvalue - 1.0) < 1e-6)
+				return true;
+		}
+		
+		return false;
 	}
 	
 	public String[] getTransientStates() {
@@ -191,7 +220,7 @@ public class DiscreteTimeMarkovModel {
 		return null;
 	}
 	
-	private boolean areProbabilitiesValid() {
+	private boolean areAllProbabilitiesValid() {
 		int numberOfStates = stateIndexes.size();
 		for (int i = 0; i < numberOfStates; i++) {
 			double totalProbability = 0.0;
