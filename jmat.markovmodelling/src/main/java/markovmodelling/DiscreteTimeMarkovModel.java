@@ -106,9 +106,6 @@ public class DiscreteTimeMarkovModel {
 	}
 	
 	public StationaryDistribution getStationaryDistribution(String startingState) throws Exception {
-		if (!hasStationaryDistribution())
-			throw new Exception("The markov model does not have a stochastic distribution.");
-		
 		int startingStateIndex = stateIndexes.get(startingState);
 		Double[][] operationInputValues = new Double[1][stateIndexes.size()];
 		
@@ -126,25 +123,25 @@ public class DiscreteTimeMarkovModel {
 			operationOutput = MatMaths.mul(operationInput, stochasticMatrix);
 		
 		HashMap<String, Double> stateDistributions = new HashMap<String, Double>();
+		double stateDistributionCount = 0;
 		
-		for (int i = 0; i < stateIndexes.size(); i++)
+		for (int i = 0; i < stateIndexes.size(); i++) {
+			stateDistributionCount += operationOutput.get(i, 0);
 			stateDistributions.put(getStateByIndex(i),  operationOutput.get(i, 0));
+		}
+		
+		if (stateDistributionCount != 1)
+			throw new Exception("The markov model does not have a stochastic distribution.");
 		
 		return new StationaryDistribution(stateDistributions);
 	}
 	
-	public boolean hasStationaryDistribution() {
-		if (!areAllProbabilitiesValid())
-			return false;
-		
-		double[] eigenvalues = MatMaths.eigenvaluesOf(stochasticMatrix);
-		for (int i = 0; i < eigenvalues.length; i++) {
-			double eigenvalue = eigenvalues[i];
-			if (Math.abs(eigenvalue - 1.0) < 1e-6)
-				return true;
-		}
-		
-		return false;
+	public boolean isReducible() {
+		return getTransientStates().length > 0;
+	}
+	
+	public boolean isIrreducible() {
+		return !isReducible();
 	}
 	
 	public String[] getTransientStates() {
